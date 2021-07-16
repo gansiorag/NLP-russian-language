@@ -46,7 +46,10 @@ class FIO():
 
 def proga():
     fio = FIO()
-    print(fio.predict('Корнеев'.lower()))
+    print(fio.predict('Корнеев'))
+    print(fio.predict('Вдохновение'))
+    print(fio.predict('Вдохновляющий'))
+    print(fio.predict('Спенсер'))
 
 if __name__ == '__main__':
     proga()
