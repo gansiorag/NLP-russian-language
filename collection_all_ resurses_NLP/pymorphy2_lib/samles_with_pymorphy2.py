@@ -1,6 +1,6 @@
 import pymorphy2
 from pprint import pprint
-from sklearn.externals import joblib
+
 morph = pymorphy2.MorphAnalyzer()
 word = morph.parse('Григорьевичом')[0]
 print(word)
