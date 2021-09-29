@@ -3,7 +3,7 @@
 Для работы с русским языком ее надо настроить.<br>
 Установка - pip install -U spacy <br>
 Для работы с русским языком необходимо загрузить соответствующую модель:<br>
-python -m spacy download ru_core_news_sm <br>
+python3 -m spacy download ru_core_news_sm <br>
 Можно работать с разными языками. Как это делать написано на странице - <br>
 https://spacy.io/models <br>
 Здесь сразу генерируется необходимый код на python.<br>
