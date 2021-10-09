@@ -35,5 +35,8 @@ class NLP_gansior():
 
 
 
+
+
+
 if __name__ == '__main__':
     work_text = NLP_gansior(test_one)
