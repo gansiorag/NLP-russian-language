@@ -18,7 +18,8 @@ russian_surnames.csv - русские фамилии с частотой вст�
 russian_names.csv - русские имена с частотой встречаемости 
 
 # Телефонный справочник Тамбова
-Telbase.csv - Twirpx.com
+telefonnyi_spravochnik_goroda_iaroslavl.txt - Twirpx.com
+Телефоны_Углича.txt - Twirpx.com
 
 spisok-russkih-familij.pdf - https://kupidonia.ru/list-download/spisok-russkih-familij 
 отчества.csv - https://git.asi.ru/gavrin_ds/poverty/blob/master/%D0%BE%D1%82%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%B0.csv
