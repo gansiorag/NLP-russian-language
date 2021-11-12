@@ -14,3 +14,4 @@ def proga():
 
 if __name__ == '__main__':
     proga()
+    'ertewtew'.isdigit()
