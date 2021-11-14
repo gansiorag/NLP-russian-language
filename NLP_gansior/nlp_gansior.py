@@ -35,8 +35,6 @@ class NLP_gansior():
 
 
 
-
-
-
 if __name__ == '__main__':
-    work_text = NLP_gansior(test_one)
+    nn = table_ocr.extract_tables.main(['/home/al/Projects_My/NLP-russian-language/examples/recognition_text/sample_3.jpg'])
+    #work_text = NLP_gansior(test_one)
