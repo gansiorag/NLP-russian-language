@@ -70,9 +70,14 @@ class Ui_Main_Wind(object):
         self.pushButton_8.setObjectName("pushButton_8")
 
         self.retranslateUi(Main_Wind)
-        self.buttonBox.accepted.connect(Main_Wind.accept)
-        self.buttonBox.rejected.connect(Main_Wind.reject)
+        # self.buttonBox.accepted.connect(Main_Wind.accept)
+        # self.buttonBox.rejected.connect(Main_Wind.reject)
+        self.pushButton.clicked.connect(self.btnClicked)
         QtCore.QMetaObject.connectSlotsByName(Main_Wind)
+
+    def btnClicked(self):
+        print('Hi! I am here!')
+
 
     def retranslateUi(self, Main_Wind):
         _translate = QtCore.QCoreApplication.translate
