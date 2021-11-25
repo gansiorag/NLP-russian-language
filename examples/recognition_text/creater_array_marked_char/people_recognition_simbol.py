@@ -36,7 +36,11 @@ def page1_click_btn_Slovar():
     name_file = askopenfilename(filetypes=(("JPG files", "*.jpg"), ("All files", "*.*")))
     page1_lineNameFile.insert(1.0, name_file)
     global sentenses_array, path_data
-    path_data = os.getcwd() + '/creater_array_marked_char/'
+    path_data = os.getcwd()
+    if path_data.find('creater_array_marked_char') >= 0 :
+        path_data = path_data +'/'
+    else:
+        path_data = path_data + '/creater_array_marked_char'
     print(path_data)
     sentenses_array = sentenses(name_file)
     global com_count_sentenses, count_sentenses
