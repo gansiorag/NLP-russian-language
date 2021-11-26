@@ -176,6 +176,7 @@ def click_btn_wtite_sim():
     print('w-simb', count_words, count_simbols, sep=' ---- ')
     count_simbols +=1
     if count_simbols >= com_count_simbols:
+        line_sim.delete(1.0, END)
         click_btn_next_word()
     else:
         num_simb = str(get_num_max()+1)
