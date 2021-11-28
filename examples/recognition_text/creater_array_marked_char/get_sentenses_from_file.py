@@ -43,6 +43,7 @@ def string_recog(in_img):
     lowers = [y for y in range(H - 1) if hist[y] > th and hist[y + 1] <= th]
     rotated = cv2.cvtColor(threshold_gray2, cv2.COLOR_GRAY2BGR)
     array_high_str = []
+    int_err = 6
     if len(uppers) > 0 and len(lowers) > 0:
         for upp_line, low_line in zip(uppers, lowers):
             array_high_str.append(low_line - upp_line)
@@ -53,29 +54,29 @@ def string_recog(in_img):
         for upp_line, low_line in zip(uppers, lowers):
             if (low_line - upp_line) > 27:
                 if (low_line - upp_line) < (median_high_str * 1.5):
-                    array_high_str.append([upp_line, low_line])
-                    cv2.line(rotated, (0, upp_line), (W, upp_line), (255, 0, 0), 1)
-                    cv2.line(rotated, (0, low_line), (W, low_line), (0, 255, 0), 1)
+                    array_high_str.append([upp_line - int_err, low_line])
+                    cv2.line(rotated, (0, upp_line - int_err), (W, upp_line - int_err), (255, 0, 0), 1)
+                    cv2.line(rotated, (0, low_line + int_err), (W, low_line + int_err), (0, 255, 0), 1)
                     if low_line > last_low: last_low = low_line
                 else:
                     delta = (low_line - upp_line)
                     if delta < (median_high_str * 2.5):
                         delta = int(delta / 2)
-                        array_high_str.append([upp_line, low_line - delta])
-                        array_high_str.append([upp_line + delta, low_line])
-                        cv2.line(rotated, (0, upp_line), (W, upp_line), (255, 0, 0), 1)
-                        cv2.line(rotated, (0, low_line - delta), (W, low_line - delta), (0, 255, 0), 1)
-                        cv2.line(rotated, (0, upp_line + delta), (W, upp_line + delta), (255, 0, 0), 1)
+                        array_high_str.append([upp_line - int_err, low_line - delta])
+                        array_high_str.append([upp_line + delta - int_err, low_line])
+                        cv2.line(rotated, (0, upp_line - int_err), (W, upp_line - int_err), (255, 0, 0), 1)
+                        cv2.line(rotated, (0, low_line - delta + int_err), (W, low_line - delta + int_err), (0, 255, 0), 1)
+                        cv2.line(rotated, (0, upp_line + delta - int_err), (W, upp_line + delta - int_err), (255, 0, 0), 1)
                         cv2.line(rotated, (0, low_line), (W, low_line), (0, 255, 0), 1)
                         if low_line > last_low: last_low = low_line
                     else:
                         delta = int(delta / 3)
-                        array_high_str.append([upp_line, low_line - delta * 2])
-                        array_high_str.append([upp_line + delta, low_line - delta])
-                        array_high_str.append([upp_line + delta * 2, low_line])
-                        cv2.line(rotated, (0, upp_line), (W, upp_line), (255, 0, 0), 1)
+                        array_high_str.append([upp_line - int_err, low_line - delta * 2])
+                        array_high_str.append([upp_line + delta - int_err, low_line - delta])
+                        array_high_str.append([upp_line + delta * 2 - int_err, low_line])
+                        cv2.line(rotated, (0, upp_line - int_err), (W, upp_line - int_err), (255, 0, 0), 1)
                         cv2.line(rotated, (0, low_line - delta * 2), (W, low_line - delta * 2), (0, 255, 0), 1)
-                        cv2.line(rotated, (0, low_line - delta), (W, low_line - delta), (255, 0, 0), 1)
+                        cv2.line(rotated, (0, low_line - delta - int_err), (W, low_line - delta - int_err), (255, 0, 0), 1)
                         cv2.line(rotated, (0, low_line), (W, low_line), (0, 255, 0), 1)
                         if low_line > last_low: last_low = low_line
         if last_low > 10:
