@@ -174,18 +174,42 @@ def click_btn_wtite_sim():
     print('kol simb - ', com_count_simbols)
 
     print('w-simb', count_words, count_simbols, sep=' ---- ')
+
+    num_simb = str(get_num_max()+1)
+    path_sim = path_data +'data_set_simb/'
+    cv2.imwrite(path_sim + 'gag_'+num_simb + '.jpg', sim_array[count_simbols]['img_sim'])
+    with open(path_sim + 'result_reconition_simb_gag.csv','a') as is_f:
+        simbol_value = line_sim.get('1.0', END + '-1c')
+        str_write = 'gag_'+num_simb + '.jpg^'+simbol_value+'\n'
+        is_f.write(str_write)
+    line_sim.delete(1.0, END)
+    count_simbols += 1
+    if count_simbols >= com_count_simbols:
+        count_simbols -= 1
+        line_sim.delete(1.0, END)
+        click_btn_next_word()
+    else:
+        output_sim()
+
+
+def click_btn_next_sim():
+    """
+    simbol = {'img_sim':[],
+              'value_sim':''}
+    """
+    # global com_count_words, count_words
+    global com_count_simbols, count_simbols
+    sim_array = sentenses_array[count_sentenses]['words'][count_words]['sim_word']
+    #print(sentenses_array[count_sentenses]['words'][count_words])
+    com_count_simbols = len(sim_array)
+    print('kol simb - ', com_count_simbols)
+
+    print('w-simb', count_words, count_simbols, sep=' ---- ')
     count_simbols +=1
     if count_simbols >= com_count_simbols:
         line_sim.delete(1.0, END)
         click_btn_next_word()
     else:
-        num_simb = str(get_num_max()+1)
-        path_sim = path_data +'data_set_simb/'
-        cv2.imwrite(path_sim + 'gag_'+num_simb + '.jpg', sim_array[count_simbols]['img_sim'])
-        with open(path_sim + 'result_reconition_simb_gag.csv','a') as is_f:
-            simbol_value = line_sim.get('1.0', END + '-1c')
-            str_write = 'gag_'+num_simb + '.jpg^'+simbol_value+'\n'
-            is_f.write(str_write)
         line_sim.delete(1.0, END)
         output_sim()
 
@@ -210,15 +234,15 @@ if __name__ == "__main__":
     image_label_sens.place(x=10, y=heighY + 50, anchor="w", heigh=100, width=1300, bordermode=OUTSIDE)
 
     btn_sentense = Button(window, text="следующее предложение", command=click_btn_next_sentense)
-    btn_sentense.place(x=1315, y=heighY + 50, anchor="w", heigh=30, width=300, bordermode=OUTSIDE)
+    btn_sentense.place(x=200, y=heighY + 50+ 50, anchor="w", heigh=30, width=300, bordermode=OUTSIDE)
 
     ################################  Поле со словами
 
     image_line_word  = ttk.Label(window, text="Здесь будет слова не разделенное на символы.")
-    image_line_word.place(x=10, y=heighY*2 + 50, anchor="w", heigh=100, width=800, bordermode=OUTSIDE)
+    image_line_word.place(x=10, y=heighY*2 + 100, anchor="w", heigh=100, width=800, bordermode=OUTSIDE)
 
     label_word_sim = ttk.Label(window, text="слово по символам")
-    label_word_sim.place(x=10, y=heighY*3  + 50, anchor="w", heigh=100, width=800, bordermode=OUTSIDE)
+    label_word_sim.place(x=10, y=heighY*3  + 100, anchor="w", heigh=100, width=800, bordermode=OUTSIDE)
     #
     btn_word = Button(window, text="следующее слово", command=click_btn_next_word)
     btn_word.place(x=815, y=heighY*2 + 100, anchor="w", heigh=30, width=300, bordermode=OUTSIDE)
@@ -226,12 +250,14 @@ if __name__ == "__main__":
 
     ################################  Поле с символом
     image_line_sim = ttk.Label(window, text="Изображение символа.")
-    image_line_sim.place(x=10, y=heighY * 4 + 50, anchor="w", heigh=100, width=200, bordermode=OUTSIDE)
+    image_line_sim.place(x=10, y=heighY * 4 + 100, anchor="w", heigh=100, width=200, bordermode=OUTSIDE)
 
     line_sim = Text(window)
-    line_sim.place(x=215, y=heighY * 4 + 50, anchor="w", heigh=30, width=50, bordermode=OUTSIDE)
+    line_sim.place(x=215, y=heighY * 4 + 100, anchor="w", heigh=30, width=50, bordermode=OUTSIDE)
 
     btn_word = Button(window, text="Записать символ", command=click_btn_wtite_sim)
     btn_word.place(x=275, y=heighY * 4 + 100, anchor="w", heigh=30, width=300, bordermode=OUTSIDE)
 
+    btn_next_simb = Button(window, text="Следующий символ", command=click_btn_next_sim)
+    btn_next_simb.place(x=600, y=heighY * 4 + 100, anchor="w", heigh=30, width=300, bordermode=OUTSIDE)
     window.mainloop()
