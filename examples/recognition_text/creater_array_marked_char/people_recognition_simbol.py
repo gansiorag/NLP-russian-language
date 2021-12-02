@@ -140,6 +140,8 @@ def output_sim():
     print('kol simb - ', com_count_simbols)
     print('w-simb', count_words, count_simbols, sep=' ---- ')
     cv2image_sim = sim_array[count_simbols]['img_sim']
+    image_line_sim.configure(image='')
+    image_line_sim.image = ''
     img_sim= Image.fromarray(cv2image_sim)
     # img_sens.show()
     imgtk_sim = ImageTk.PhotoImage(image=img_sim)
@@ -187,6 +189,8 @@ def click_btn_wtite_sim():
     if count_simbols >= com_count_simbols:
         count_simbols -= 1
         line_sim.delete(1.0, END)
+        image_line_sim.configure(text="")
+        image_line_sim.text = ""
         click_btn_next_word()
     else:
         output_sim()

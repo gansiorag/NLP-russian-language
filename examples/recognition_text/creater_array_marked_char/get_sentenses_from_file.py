@@ -43,23 +43,23 @@ def string_recog(in_img):
     lowers = [y for y in range(H - 1) if hist[y] > th and hist[y + 1] <= th]
     rotated = cv2.cvtColor(threshold_gray2, cv2.COLOR_GRAY2BGR)
     array_high_str = []
-    int_err = 6
+    int_err = 8
     if len(uppers) > 0 and len(lowers) > 0:
         for upp_line, low_line in zip(uppers, lowers):
             array_high_str.append(low_line - upp_line)
         median_high_str = int(np.median(np.array(array_high_str)))
         array_high_str = []
-        if median_high_str < 27: median_high_str = 28
+        if median_high_str<39 and median_high_str>45: median_high_str = 39
         last_low = 0
         for upp_line, low_line in zip(uppers, lowers):
-            if (low_line - upp_line) > 27:
-                if (low_line - upp_line) < (median_high_str * 1.5):
+            delta = (low_line - upp_line)
+            if delta > 27:
+                if delta < (median_high_str * 1.5):
                     array_high_str.append([upp_line - int_err, low_line])
                     cv2.line(rotated, (0, upp_line - int_err), (W, upp_line - int_err), (255, 0, 0), 1)
                     cv2.line(rotated, (0, low_line + int_err), (W, low_line + int_err), (0, 255, 0), 1)
                     if low_line > last_low: last_low = low_line
                 else:
-                    delta = (low_line - upp_line)
                     if delta < (median_high_str * 2.5):
                         delta = int(delta / 2)
                         array_high_str.append([upp_line - int_err, low_line - delta])
@@ -174,7 +174,7 @@ def multi_simb(img_exp,list_img_char, threshold_gray3,y, x_start,len_are, num_mu
             for i_y in range(y) :
                 img_exp[i_y,x_start+int(len_are*k/num_mul)] = 120
     else:
-        n_m_l = int(len_are/31)
+        n_m_l = int(len_are/29)
         for k in range(n_m_l):
             list_img_char.append(threshold_gray3[0:y,x_start+int(len_are*k/n_m_l):x_start+int(len_are*(k+1)/n_m_l)])
             for i_y in range(y) :
@@ -201,11 +201,11 @@ def get_char(input_img):
         for i_y in range(y) :
             sum_com = sum_com + threshold_gray3[i_y,i_x]
         line_sum.append(sum_com)
-    bor, mmm = bordr(line_sum, 10)
+    bor, mmm = bordr(line_sum, 1)# first = 10
     median_c, median_err = min_area(line_sum, bor,5,max_y)
     len_are = 0
     list_img_char = []
-    if median_err>12:
+    if median_err>10:
         x_start = 0
         for i_x in range(x) :
             if line_sum[i_x] <= bor:
@@ -213,17 +213,18 @@ def get_char(input_img):
                     x_start = i_x
                 len_are +=1
             else:
-                if len_are <= median_err and len_are>0 and line_sum[i_x]<mmm:
+                #if len_are <= median_err and len_are>0 and line_sum[i_x]<mmm:
+                if len_are < 29 and len_are > 0:
                     len_are +=1
                 else:
                     if len_are> 0:
-                        if len_are > 32 and len_are < 69:
+                        if len_are > 42 and len_are <= 64:
                             list_img_char.append(threshold_gray3[0:y, x_start:x_start+int(len_are/2)])
                             list_img_char.append(threshold_gray3[0:y, x_start+int(len_are/2):x_start+len_are])
                             for i_y in range(y) :
                                 img_exp[i_y,x_start+int(len_are/2)] = 120
                             #show_image(threshold_gray3[0:y, x_start:x_start+len_are])
-                        elif len_are > 69 and len_are < 100:
+                        elif len_are > 64 and len_are < 100:
                             multi_simb(img_exp, list_img_char, threshold_gray3, y, x_start,len_are, 3)
                         elif len_are >= 100 and len_are < 130:
                             multi_simb(img_exp, list_img_char, threshold_gray3, y, x_start,len_are, 4)
