@@ -1,7 +1,11 @@
 1^/home/al/Projects_My/NLP-russian-language/examples/recognition_text/creater_array_marked_char/data_set_jpg/sample_stat_1.jpg
 2^/home/al/MyProjects/NLP-russian-language/examples/recognition_text/creater_array_marked_char/data_set_jpg/sample_stat_2.jpg
 3^/home/al/Projects_My/NLP-russian-language/examples/recognition_text/creater_array_marked_char/data_set_jpg/sample_stat_3.jpg
-4^/home/al/Projects_My/NLP-russian-language/examples/recognition_text/creater_array_marked_char/data_set_jpg/doc00030320210414101013_001.jpg
-5^/home/al/Projects_My/NLP-russian-language/examples/recognition_text/creater_array_marked_char/data_set_jpg/staistc_dirt/1969п278н_6.jpg
-6^/home/al/Projects_My/NLP-russian-language/examples/recognition_text/creater_array_marked_char/data_set_jpg/my_set/1958п409н_23.12_6.jpg
-7^/home/al/Projects_My/NLP-russian-language/examples/recognition_text/creater_array_marked_char/data_set_jpg/staistc_dirt/1979п731н_4.jpg
+4^/home/al/Projects_My/NLP-russian-language/examples/recognition_text/creater_array_marked_char/data_set_jpg/doc00030020210414100706_001.jpg
+5^/home/al/Projects_My/NLP-russian-language/examples/recognition_text/creater_array_marked_char/data_set_jpg/1965п209н_3.jpg
+6^/home/al/Projects_My/NLP-russian-language/examples/recognition_text/creater_array_marked_char/data_set_jpg/1965п209н_14.jpg
+7^/home/al/Projects_My/recognition_text/dataset_clear_document/1968п420н_38.jpg
+8^/home/al/Projects_My/recognition_text/dataset_clear_document/1968п420н_25.jpg
+9^/home/al/Projects_My/recognition_text/dataset_clear_document/1971п499н_12.jpg
+10^/home/al/Projects_My/recognition_text/dataset_clear_document/1971п499н_26.jpg
+11^/home/al/Projects_My/recognition_text/dataset_clear_document/1971п499н_48.jpg
