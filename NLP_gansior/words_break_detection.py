@@ -69,12 +69,13 @@ if __name__ == '__main__':
                 len_dd[len(frag)] += 1
         kk += 1
 
-    print(statis.most_common(100))
-    print(len(statis))
-    print(len_dd)
+    # print(statis.most_common(100))
+    # print(len(statis))
+    # print(len_dd)
     #print(dd)
     text_exp = ''.join(ttt)
     print(text_exp[:500])
+    print()
     text_rez = ''
     kk = 0 
     
@@ -91,5 +92,4 @@ if __name__ == '__main__':
                 text_rez += text_exp[kk]
                 kk += 1
         #if kk >100: break
-    print(dd['томпол'])
     print(text_rez[0:600])
