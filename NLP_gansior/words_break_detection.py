@@ -2,6 +2,20 @@ import re
 from collections import Counter
 
 def get_stat_break(name:str):
+    """
+    This module clear document of all bad simbols and 
+    changes them to empty simbols
+    start 20/12/2021
+    end 21/12/2021
+
+    Args:
+        name (str): full text in lower simbols
+
+    Returns:
+        [str]: text with empty simbols bitween words
+    
+    """
+    
     rul_one = re.compile(r'\s[а-я]\s')
     rul_two = re.compile(r'[.,?!«»;:“)(№0-9]')
     rul_three = re.compile(r'\s+')
@@ -31,6 +45,14 @@ def get_stat_break(name:str):
     
 
 def get_num(i:int):
+    """ Get number 
+
+    Args:
+        i (int): this number
+
+    Returns:
+        [str]: if number 1 - 9 returne 01 - 09 
+    """
     answer = ''
     if i<10: answer = '0' + str(i)
     else:
@@ -39,6 +61,12 @@ def get_num(i:int):
         
 
 if __name__ == '__main__':
+    """
+    Get list of documents and work with them.
+    Result - file csv with two fields field one - six simbols - [xxxxxx] field two - [xxx xxx]
+    
+    """
+    
     # for i in range(1,19):
     #     num = get_num(i)
     #     n_f = f'/media/al/work1/NLP/Datasets/И.В. Сталин. Собрание сочинений в 18 томах/{num}.txt'
@@ -68,11 +96,6 @@ if __name__ == '__main__':
                 dd[frag] = tt[-3:] + ' '
                 len_dd[len(frag)] += 1
         kk += 1
-
-    # print(statis.most_common(100))
-    # print(len(statis))
-    # print(len_dd)
-    #print(dd)
     text_exp = ''.join(ttt)
     print(text_exp[:500])
     print()

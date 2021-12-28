@@ -1,0 +1,6 @@
+__pycache__/
+datasets/**
+NLP_gansior/professions/dataset_profession/**
+.idea
+NLP_gansior/professions/get_information/*.txt
+NLP_gansior/professions/get_information/*.csv

@@ -1,8 +1,8 @@
 """
-modules make
+modules get names of professions from doc files
 
 start 20/12/2021
-end 
+end 23/12/2021
 author : Gansior Alexandr
 gansior@gansior.ru  +79173383804
 """
