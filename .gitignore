@@ -4,3 +4,5 @@ NLP_gansior/professions/dataset_profession/**
 .idea
 NLP_gansior/professions/get_information/*.txt
 NLP_gansior/professions/get_information/*.csv
+.ipynb_checkpoints/
+collection_all_ resurses_NLP/Auto_spell_checkers/*.csv
