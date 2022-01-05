@@ -6,3 +6,8 @@ NLP_gansior/professions/get_information/*.txt
 NLP_gansior/professions/get_information/*.csv
 .ipynb_checkpoints/
 collection_all_ resurses_NLP/Auto_spell_checkers/*.csv
+datasets/datasets_with_name_peaple/База данных имен и фамилий в формате CSV
+datasets/datasets_with_name_peaple/справочники
+datasets/datasets_with_name_peaple/name-surname-master
+datasets/datasets_with_name_peaple/spravochnik_telefonnyi_belgorodskoi_oblasti
+datasets/datasets_with_name_peaple/*.txt
