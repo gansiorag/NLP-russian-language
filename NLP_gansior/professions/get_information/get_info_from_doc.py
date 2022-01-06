@@ -6,7 +6,7 @@ end 23/12/2021
 author : Gansior Alexandr
 gansior@gansior.ru  +79173383804
 """
-    
+
 import glob
 import docx
 import textract
