@@ -1,3 +1,4 @@
+.gitignore
 __pycache__/
 datasets/**
 NLP_gansior/professions/dataset_profession/**
@@ -14,3 +15,4 @@ datasets/справочники
 datasets/name-surname-master
 datasets/spravochnik_telefonnyi_belgorodskoi_oblasti
 datasets/*.txt
+/collection_all_resurses_NLP/BERT/classification_ model_for_imbalanced_classes/dataset/*.*
