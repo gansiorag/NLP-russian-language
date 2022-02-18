@@ -15,11 +15,14 @@ from tkinter import ttk
 from tkinter.filedialog import askopenfilename
 from tkinter import messagebox
 
-dd = {}
+dd = {33:{},
+      32:{},
+      23:{}}
 
 # page2 Контекстный анализ слов click Buttom
 def page2_click_btn_Kontext():
     is_str = page2_lineText_DublSlovo.get('1.0', END + '-1c')
+    # разделение 3 - 3
     kk=0
     text_rez = ''
     for tt in is_str:
@@ -28,15 +31,93 @@ def page2_click_btn_Kontext():
             for ik in range(6):
                 frag += is_str[kk + ik]
             #print(frag)
-            if frag in dd:
-                text_rez += dd[frag]
+            if frag in dd[33]:
+                text_rez += dd[33][frag]
                 kk += 3
             else:
                 text_rez += is_str[kk]
                 kk += 1
-    print(text_rez)
+    
+    # разделение 3 - 2
+    is_list = text_rez.split()
+    text_rez = ''
+    for frr in is_list:
+        if len(frr)>5:
+            kk = 5
+            st =0
+            while kk<=(len(frr) - 1):
+                frag = frr[st:kk]
+                #print(frag)
+                if frag in dd[32]:
+                    frr = frr[:st+3] + ' ' + frr[st+3:]
+                    st = st+4
+                    kk = st+5
+                else:
+                    st +=1
+                    kk += 1
+            text_rez += frr + ' '
+        elif len(frr)==5:
+            if frr in dd[32]:
+                text_rez +=(frr[:3] + ' ' + frr[3:])
+        else:
+            text_rez +=(frr + ' ')
+
+    # разделение 2 - 3
+    is_list = text_rez.split()
+    text_rez = ''
+    for frr in is_list:
+        if len(frr)>5:
+            kk = 5
+            st =0
+            while kk<=(len(frr) - 1):
+                frag = frr[st:kk]
+                print(frag)
+                if frag in dd[23]:
+                    frr = frr[:st+2] + ' ' + frr[st+2:]
+                    st = st+3
+                    kk = st+5
+                else:
+                    st +=1
+                    kk += 1
+            text_rez += frr + ' '
+        elif len(frr)==5:
+            if frr in dd[23]:
+                text_rez +=(frr[:2] + ' ' + frr[2:])
+        else:
+            text_rez +=(frr + ' ')
+
+    # разделение 3 - 3 по словный проход
+    is_list = text_rez.split()
+    text_rez = ''
+    for frr in is_list:
+        if len(frr)>6:
+            kk = 6
+            st =0
+            while kk<=(len(frr) - 1):
+                frag = frr[st:kk]
+                #print(frag)
+                if frag in dd[33]:
+                    frr = frr[:st+3] + ' ' + frr[st+3:]
+                    st = st+4
+                    kk = st+6
+                else:
+                    st +=1
+                    kk += 1
+            text_rez += frr + ' '
+        elif len(frr)==6:
+            if frr in dd[33]:
+                text_rez +=(frr[:3] + ' ' + frr[3:])
+        else:
+            text_rez +=(frr + ' ')
+
+    #print(text_rez)
     page2_lineText_TextData.delete(1.0, END)
     page2_lineText_TextData.insert(INSERT, text_rez)
+
+
+def page2_click_btn_clear():
+    page2_lineText_DublSlovo.delete(1.0, END)
+    page2_lineText_TextData.delete(1.0, END)
 
 
 def page2_click_btn_Ras():
@@ -47,6 +128,7 @@ def page2_click_btn_Ras():
     ttt = get_stat_break(is_text).split()
     kk = 0 
     len_dd = Counter()
+    list_join = []
     for tt in ttt:
         frag =''
         if kk+1 < len(ttt):
@@ -62,9 +144,20 @@ def page2_click_btn_Ras():
                 elif len(tt) > 3 and len(ttt[kk + 1]) > 3:    
                     frag = (tt[-3:] + ttt[kk + 1][0:3])
                 statis[frag] +=1
-                dd[frag] = tt[-3:] + ' '
+                dd[33][frag] = tt[-3:] + ' '
                 len_dd[len(frag)] += 1
+            else:
+                list_join.append(tt +' '+ ttt[kk+1])
         kk += 1
+    for tt in list_join:
+        serviis_list = tt.split()
+        if len(serviis_list[0])>=3 and len(serviis_list[1])==2:
+            dd[32][serviis_list[0][-3:]+serviis_list[1]] = serviis_list[0][-3:]+ ' ' + serviis_list[1]
+        elif len(serviis_list[0]) ==2 and len(serviis_list[1])>=3:
+            dd[23][serviis_list[0]+serviis_list[1][:3]] = serviis_list[0]+ ' ' + serviis_list[1][:3]
+
+    print(dd[23])     
+    print(list_join)
     text_exp = ''.join(ttt)
     print()
     print(text_exp)
@@ -137,56 +230,6 @@ if __name__ == '__main__':
     
     """
     
-    # for i in range(1,19):
-    #     num = get_num(i)
-    #     n_f = f'/media/al/work1/NLP/Datasets/И.В. Сталин. Собрание сочинений в 18 томах/{num}.txt'
-    #     get_stat_break(n_f)
-    # n_f = f'/media/al/work1/NLP/Datasets/И.В. Сталин. Собрание сочинений в 18 томах/01.txt'
-    # get_stat_break(n_f)
-    # statis = Counter()
-    # ttt = get_stat_break(n_f).split()
-    # kk = 0 
-    # dd = {}
-    # len_dd = Counter()
-    # for tt in ttt:
-    #     frag =''
-    #     if kk+1 < len(ttt):
-    #         t_n = ttt[kk+1].strip()
-    #         tt = tt.strip()
-    #         if len(tt)>=3 and len(ttt[kk+1])>=3:
-    #             if len(tt) == 3 and len(ttt[kk + 1])> 3:
-    #                 frag = (tt + ttt[kk + 1][0:3])
-    #             elif len(tt) == 3 and len(ttt[kk + 1]) == 3:
-    #                 frag = (tt + ttt[kk + 1])
-    #             elif len(tt) > 3 and len(ttt[kk + 1]) == 3:
-    #                 frag = (tt[-3:] + ttt[kk + 1])
-    #             elif len(tt) > 3 and len(ttt[kk + 1]) > 3:    
-    #                 frag = (tt[-3:] + ttt[kk + 1][0:3])
-    #             statis[frag] +=1
-    #             dd[frag] = tt[-3:] + ' '
-    #             len_dd[len(frag)] += 1
-    #     kk += 1
-    # text_exp = ''.join(ttt)
-    # print(text_exp[:500])
-    # print()
-    # text_rez = ''
-    # kk = 0 
-    
-    # for tt in text_exp:
-    #     frag =''
-    #     if kk<(len(text_exp)-6):
-    #         for ik in range(6):
-    #             frag += text_exp[kk + ik]
-    #         #print(frag)
-    #         if frag in dd:
-    #             text_rez += dd[frag]
-    #             kk += 3
-    #         else:
-    #             text_rez += text_exp[kk]
-    #             kk += 1
-    #     #if kk >100: break
-    # print(text_rez[0:600])
-
     root = Tk()
     root.title("Контекстный анализ слов и коротких фраз")
     root.geometry("1050x700")
@@ -233,10 +276,13 @@ if __name__ == '__main__':
     page2_lineText_TextData.place(x=520, y=heighY + 40, anchor="nw", heigh=500, width=500, bordermode=OUTSIDE)
 
     page2_btn_Ras = Button(page2, text="Обучиться", command=page2_click_btn_Ras)
-    page2_btn_Ras.place(x=10, y=heighY + 560, anchor="w", heigh=30, width=200, bordermode=OUTSIDE)
+    page2_btn_Ras.place(x=10, y=heighY + 560, anchor="w", heigh=30, width=150, bordermode=OUTSIDE)
+
+    page2_btn_clear = Button(page2, text="Очистить", command=page2_click_btn_clear)
+    page2_btn_clear.place(x=170, y=heighY + 560, anchor="w", heigh=30, width=150, bordermode=OUTSIDE)
 
     page2_btn_Kontext = Button(page2, text="Разделить текст", command=page2_click_btn_Kontext)
-    page2_btn_Kontext.place(x=280, y=heighY+560, anchor="w", heigh=30, width=200, bordermode=OUTSIDE)
+    page2_btn_Kontext.place(x=340, y=heighY+560, anchor="w", heigh=30, width=150, bordermode=OUTSIDE)
 
     
 root.mainloop()
