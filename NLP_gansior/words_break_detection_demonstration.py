@@ -24,20 +24,33 @@ def page2_click_btn_Kontext():
     is_str = page2_lineText_DublSlovo.get('1.0', END + '-1c')
     # разделение 3 - 3
     kk=0
+    print(dd[33])
     text_rez = ''
-    for tt in is_str:
-        frag =''
-        if kk<(len(is_str)-6):
-            for ik in range(6):
-                frag += is_str[kk + ik]
-            #print(frag)
-            if frag in dd[33]:
-                text_rez += dd[33][frag]
-                kk += 3
-            else:
-                text_rez += is_str[kk]
-                kk += 1
-    
+    ichar =0
+    while ichar < len(is_str):
+        frag =is_str[ichar:ichar+6]
+        print('frag1 = ', frag)
+        if frag in dd[33]:
+            text_rez += dd[33][frag]
+            ichar += 3
+        else:
+            text_rez += is_str[ichar]
+            ichar += 1
+
+    print(text_rez)
+    # for tt in is_str:
+    #     frag =''
+    #     if kk<(len(is_str)-6):
+    #         for ik in range(6):
+    #             frag += is_str[kk + ik]
+    #         print('frag1 = ', frag)
+    #         if frag in dd[33]:
+    #             text_rez += dd[33][frag]
+    #             kk += 3
+    #         else:
+    #             text_rez += is_str[kk]
+    #             kk += 1
+
     # разделение 3 - 2
     is_list = text_rez.split()
     text_rez = ''
@@ -47,14 +60,16 @@ def page2_click_btn_Kontext():
             st =0
             while kk<=(len(frr) - 1):
                 frag = frr[st:kk]
-                #print(frag)
+                print(frag)
                 if frag in dd[32]:
                     frr = frr[:st+3] + ' ' + frr[st+3:]
                     st = st+4
                     kk = st+5
                 else:
+                    text_rez += frr[st]
                     st +=1
                     kk += 1
+                    
             text_rez += frr + ' '
         elif len(frr)==5:
             if frr in dd[32]:
@@ -148,6 +163,7 @@ def page2_click_btn_Ras():
                 len_dd[len(frag)] += 1
             else:
                 list_join.append(tt +' '+ ttt[kk+1])
+
         kk += 1
     for tt in list_join:
         serviis_list = tt.split()
@@ -155,8 +171,8 @@ def page2_click_btn_Ras():
             dd[32][serviis_list[0][-3:]+serviis_list[1]] = serviis_list[0][-3:]+ ' ' + serviis_list[1]
         elif len(serviis_list[0]) ==2 and len(serviis_list[1])>=3:
             dd[23][serviis_list[0]+serviis_list[1][:3]] = serviis_list[0]+ ' ' + serviis_list[1][:3]
-
-    print(dd[23])     
+    print('dd[32] = ', dd[32])
+    print('dd[23] = ',dd[23])     
     print(list_join)
     text_exp = ''.join(ttt)
     print()
