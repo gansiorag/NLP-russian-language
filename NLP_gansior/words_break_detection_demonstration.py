@@ -24,12 +24,12 @@ def page2_click_btn_Kontext():
     is_str = page2_lineText_DublSlovo.get('1.0', END + '-1c')
     # разделение 3 - 3
     kk=0
-    print(dd[33])
+    #print(dd[33])
     text_rez = ''
     ichar =0
     while ichar < len(is_str):
         frag =is_str[ichar:ichar+6]
-        print('frag1 = ', frag)
+        #print('frag1 = ', frag)
         if frag in dd[33]:
             text_rez += dd[33][frag]
             ichar += 3
@@ -37,20 +37,7 @@ def page2_click_btn_Kontext():
             text_rez += is_str[ichar]
             ichar += 1
 
-    print(text_rez)
-    # for tt in is_str:
-    #     frag =''
-    #     if kk<(len(is_str)-6):
-    #         for ik in range(6):
-    #             frag += is_str[kk + ik]
-    #         print('frag1 = ', frag)
-    #         if frag in dd[33]:
-    #             text_rez += dd[33][frag]
-    #             kk += 3
-    #         else:
-    #             text_rez += is_str[kk]
-    #             kk += 1
-
+    #print('text_rez1 = ', text_rez)
     # разделение 3 - 2
     is_list = text_rez.split()
     text_rez = ''
@@ -60,23 +47,22 @@ def page2_click_btn_Kontext():
             st =0
             while kk<=(len(frr) - 1):
                 frag = frr[st:kk]
-                print(frag)
+                #print(frag)
                 if frag in dd[32]:
                     frr = frr[:st+3] + ' ' + frr[st+3:]
-                    st = st+4
-                    kk = st+5
+                    st = st + 4
+                    kk = st + 5
                 else:
-                    text_rez += frr[st]
+                    #text_rez += frr[st]
                     st +=1
                     kk += 1
-                    
             text_rez += frr + ' '
         elif len(frr)==5:
             if frr in dd[32]:
                 text_rez +=(frr[:3] + ' ' + frr[3:])
         else:
             text_rez +=(frr + ' ')
-
+    #print('text_rez 2 = ', text_rez)
     # разделение 2 - 3
     is_list = text_rez.split()
     text_rez = ''
@@ -86,7 +72,7 @@ def page2_click_btn_Kontext():
             st =0
             while kk<=(len(frr) - 1):
                 frag = frr[st:kk]
-                print(frag)
+                #print(frag)
                 if frag in dd[23]:
                     frr = frr[:st+2] + ' ' + frr[st+2:]
                     st = st+3
@@ -98,9 +84,11 @@ def page2_click_btn_Kontext():
         elif len(frr)==5:
             if frr in dd[23]:
                 text_rez +=(frr[:2] + ' ' + frr[2:])
+            else:
+                text_rez +=(frr + ' ')
         else:
             text_rez +=(frr + ' ')
-
+    #print('text_rez 3 = ', text_rez)
     # разделение 3 - 3 по словный проход
     is_list = text_rez.split()
     text_rez = ''
@@ -122,10 +110,12 @@ def page2_click_btn_Kontext():
         elif len(frr)==6:
             if frr in dd[33]:
                 text_rez +=(frr[:3] + ' ' + frr[3:])
+            else:
+                text_rez += frr + ' '
         else:
             text_rez +=(frr + ' ')
 
-    #print(text_rez)
+    print('len(text_rez 2 = ', len(text_rez.split(' ')))
     page2_lineText_TextData.delete(1.0, END)
     page2_lineText_TextData.insert(INSERT, text_rez)
 
@@ -177,6 +167,7 @@ def page2_click_btn_Ras():
     text_exp = ''.join(ttt)
     print()
     print(text_exp)
+    print('len(ttt) 1 = ',len(ttt))
     page2_lineText_DublSlovo.delete(1.0, END)
     page2_lineText_DublSlovo.insert(INSERT, text_exp)
 
