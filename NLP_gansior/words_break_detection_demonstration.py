@@ -15,9 +15,28 @@ from tkinter import ttk
 from tkinter.filedialog import askopenfilename
 from tkinter import messagebox
 
+#Словарь сочетаний символов
+# цифры определяют следующее
+# Первая цифра количество символов с конца слова
+# Вторая цифра количество сиволов с начала слова
+# количество сочетаний до трех символов
+# 33, 32, 31, 23, 22, 21, 13, 12, 11
+# примеры возникновения сочетаний
+#
+#
+#
+
 dd = {33:{},
       32:{},
-      23:{}}
+      31:{},
+      23:{},
+      23:{},
+      22:{},
+      21:{},
+      13:{},
+      12:{},
+      11:{}
+      }
 
 # page2 Контекстный анализ слов click Buttom
 def page2_click_btn_Kontext():
@@ -126,15 +145,24 @@ def page2_click_btn_clear():
 
 
 def page2_click_btn_Ras():
+    # learn and get dict fragment of diferetnt
+    
     is_text = page2_lineText_DublSlovo.get('1.0', END + '-1c')
     print(is_text)
-    get_stat_break(is_text)
     statis = Counter()
     ttt = get_stat_break(is_text).split()
     kk = 0 
     len_dd = Counter()
     list_join = []
-    for tt in ttt:
+    indItem = 0
+    while indItem < len(len(ttt)):
+        if len(ttt[indItem]) == 1 and indItem <(len(ttt) - 1):
+            if len(ttt[indItem +1]) == 1:
+                frag = ttt[indItem] + ttt[indItem + 1]
+                dd[11][frag] = ttt[indItem] + ' ' + ttt[indItem + 1]
+                ttt.pop(indItem + 1)
+        indItem +=1
+    for tt in ttt: 
         frag =''
         if kk+1 < len(ttt):
             t_n = ttt[kk+1].strip()
@@ -201,12 +229,12 @@ def get_stat_break(is_txt:str):
     tt =rul_two.sub(' ',tt)
     tt =rul_three.sub(' ',tt)
     ttt +=(tt.strip() + ' ')
-    ttt = ttt.replace(' в ', ' ')
-    ttt = ttt.replace(' г ', ' ')
+    #ttt = ttt.replace(' в ', ' ')
+    #ttt = ttt.replace(' г ', ' ')
     ttt = ttt.replace(' iv ', ' ')
     ttt = ttt.replace(' iii ', ' ')
     ttt = ttt.replace(' iii ', ' ')
-    ttt = ttt.replace(' ‑го ', ' ')
+    ttt = ttt.replace(' ‑го ', ' го ')
     ttt = ttt.replace(' – ', ' ')
     ttt = ttt.replace(' i ', ' ')
     ttt = rul_one.sub(' ', ttt)
@@ -238,7 +266,7 @@ if __name__ == '__main__':
     """
     
     root = Tk()
-    root.title("Контекстный анализ слов и коротких фраз")
+    root.title("Разделение сплошного потока символов")
     root.geometry("1050x700")
     mainmenu = Menu(root)
     root.config(menu=mainmenu)
