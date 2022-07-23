@@ -15,7 +15,7 @@ from tkinter import ttk
 from tkinter.filedialog import askopenfilename
 from tkinter import messagebox
 
-#Словарь сочетаний символов
+# `Словарь сочетаний символов
 # цифры определяют следующее
 # Первая цифра количество символов с конца слова
 # Вторая цифра количество сиволов с начала слова
