@@ -23,6 +23,7 @@ from tkinter import Tk, ttk
 from tkinter import filedialog as fd
 from tkinter import messagebox
 from widgets import crLabel, crText, crButton, open_text_file
+from widgets import crListBox, MenuTypeSources
 
 
 
@@ -40,7 +41,8 @@ def addPage1(Osn):
     label2 = crLabel(page1, "Установите характеристики файла.",1, 3)
     
     label3 = crLabel(page1, "Тематика файла",0, 4)
-    TemaSource = crText(page1, KolStepX =0, KolStepY=5, Kwidth=2, Kheigh=7)
+    TemaSource = crListBox(page1, MenuTypeSources, 0, 6, 1, 2)
+    #TemaSource = crText(page1, KolStepX =0, KolStepY=5, Kwidth=2, Kheigh=7)
     
     
     label4 = crLabel(page1, "Описание источника файла",0, 8)

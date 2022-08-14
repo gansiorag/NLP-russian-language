@@ -2,7 +2,7 @@
  This module make 
     
 Athor: Gansior Alexander, gansior@gansior.ru, +79173383804
-Starting 2022//
+Starting 2022/08/01
 Ending 2022//
     
 '''
@@ -12,7 +12,9 @@ from termcolor import cprint
 Text colors: grey red green yellow blue magenta cyan white
 Text highlights: on_grey on_red on_green on_yellow on_blue on_magenta on_cyan on_white
 Attributes: bold dark underline blink reverse concealed
+template --> cprint(f'{}' , 'red', attrs=['bold'])
 '''
+
 import re
 from collections import Counter
 from tkinter import *
@@ -28,7 +30,31 @@ session = {
 'widthBt' : 300,
 'heighY' : 10 
 }
- 
+import os
+import sys
+
+userPath = os.getcwd().split('NLP-russian-language')[0] + 'NLP-russian-language/NLP_gansior/work_with_error'
+sys.path.append(userPath)
+
+from dividing_continuous_stream_characters_into_words.ModulesInterface.WorkWithDB import WorkDB
+
+MenuTypeSources =[nm[1] for nm in WorkDB.selectTypeSources()]
+cprint(f'{MenuTypeSources}' , 'magenta', attrs=['bold'])
+
+
+def crListBox(page:Frame, menu:list, KolStepX, KolStepY, ww, high) :
+    listm = Listbox(page)
+    listm.insert(0, *MenuTypeSources)
+    sb = Scrollbar(listm, orient=VERTICAL)
+    sb.pack(side=RIGHT, fill=Y)
+
+    listm.configure(yscrollcommand=sb.set)
+    sb.config(command=listm.yview)
+    listm.place(x=session['borderLeft'] +10 + session['WidthLabel']*KolStepX, 
+                 y=session['startY']+20+ session['HighLabel']*KolStepY, 
+                 anchor="w", heigh=session['HighLabel']*high, width=session['WidthLabel']*ww, 
+                 bordermode=OUTSIDE)
+    return listm
  
 def open_text_file(text:Text):
     # file type
