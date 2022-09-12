@@ -57,6 +57,7 @@ def crListBox(page:Frame, menu:list, KolStepX, KolStepY, ww, high) :
     return listm
  
 def open_text_file(text:Text):
+    text.delete('1.0', END)
     # file type
     filetypes = (
         ('text files', '*.txt'),
@@ -68,7 +69,8 @@ def open_text_file(text:Text):
     # show the open file dialog
     f = fd.askopenfilename(filetypes=filetypes)
     # read the text file and show its content on the Text
-    text.insert('1.0', f)
+    text.insert('1.0', f.strip())
+    
      
     
 def crLabel(page:Frame, textL:str, KolStepX:int, KolStepY:int):

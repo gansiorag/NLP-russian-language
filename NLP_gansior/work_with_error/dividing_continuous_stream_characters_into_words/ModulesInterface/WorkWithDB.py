@@ -75,7 +75,13 @@ class WorkDB:
         cprint(sql, 'red')
         return sql
     
-    
+    @selectDB
+    def getNameFile(nameFile:str):
+        sql = f"""SELECT guidsources, path_sours, data_start, nameFile, guidtema 
+        FROM sourcesData 
+        WHERE nameFile = '{nameFile}';"""
+        return sql
+
     
     
 # def prog1():

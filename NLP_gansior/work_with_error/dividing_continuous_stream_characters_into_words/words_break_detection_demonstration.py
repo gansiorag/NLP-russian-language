@@ -2,15 +2,18 @@
  This module make 
     
 Athor: Gansior Alexander, gansior@gansior.ru, +79173383804
-Starting 2022/02/15
+Starting 2022/07/26
 Ending 2022//
     
 '''
-
-
-from ModulesInterface.page2 import addPage2
-from ModulesInterface.page1 import addPage1
-
+    
+from pydoc import ispath
+from termcolor import cprint
+'''
+Text colors: grey red green yellow blue magenta cyan white
+Text highlights: on_grey on_red on_green on_yellow on_blue on_magenta on_cyan on_white
+Attributes: bold dark underline blink reverse concealed
+'''
 
 import re
 from collections import Counter
@@ -18,6 +21,20 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter import messagebox
+
+import os
+import sys
+
+nameProjectStart = 'NLP-russian-language'
+nameProject = 'NLP-russian-language/NLP_gansior/work_with_error'
+cprint(os.getcwd(), 'green')
+PathPrj = os.getcwd().split(nameProjectStart)[0] + nameProject + '/'
+cprint(PathPrj, 'blue')
+sys.path.append(PathPrj)
+
+from ModulesInterface.page2 import Page2
+from ModulesInterface.page1 import Page1
+from ModulesInterface.baseModul import geomPar
 
 # `Словарь сочетаний символов
 # цифры определяют следующее
@@ -29,15 +46,6 @@ from tkinter import messagebox
 #
 #
 #
-
-import sys
-import os
-
-userPath = os.getcwd().split(
-    'NLP-russian-language')[0] + 'NLP-russian-language/'
-sys.path.append(userPath)
-
-
 
 
 
@@ -56,17 +64,17 @@ if __name__ == '__main__':
 
     root = Tk()
     root.title("Разделение сплошного потока символов")
-    root.geometry("1050x700")
+    root.geometry(geomPar['rootGeometry'])
     # Начальные установки
-    widthLabe = 500
-    widthBt = 300
-    heighY = 10
+    widthLabe = geomPar['widthLabe']
+    widthBt = geomPar['widthBt']
+    heighY = geomPar['heighY']
 
-    Osn = ttk.Notebook()
-    page1 = addPage1(Osn)
-    page2 = addPage2(Osn, heighY)
+    Osn = ttk.Notebook(root)
+    page1 = Page1(Osn)
+    page2 = Page2(Osn, page1)
     page3 = addPage3(Osn)
 
     Osn.pack(padx=2, pady=3, fill=BOTH, expand=1)
 
-root.mainloop()
+    root.mainloop()

@@ -161,6 +161,7 @@ def separatorWords(sourceText:str, dictFr:dict) ->list:
     text_rez = baseSeparator(text_rez, dictFr, 11, 1, 1)
     print('text_rez 1 1 = ', text_rez)
     
+    
     return text_rez
     
     
@@ -176,3 +177,5 @@ if __name__ == '__main__':
     DubleText = separatorWords(RezText, dictFr)
     cprint(f'{DubleText}' , 'red', attrs=['bold'])
     cprint(f'{IshText}' , 'green', attrs=['bold'])
+    s = 'python'
+    print(s[:8])
