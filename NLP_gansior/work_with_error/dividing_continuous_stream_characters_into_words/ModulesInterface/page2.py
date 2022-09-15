@@ -15,6 +15,7 @@ PathPrj = os.getcwd().split(nameProjectStart)[0] + nameProject + '/'
 sys.path.append(PathPrj)
 
 from ModulesInterface.baseModul import geomPar
+from testFeuch import connectLearn
 
 
 dd = {33:{},
@@ -45,10 +46,6 @@ def get_num(i:int):
     else:
         answer = str(i)
     return answer
-
-def get_stat_break(is_text:str):
-    return is_text
-    
 
     
 class Page2() :
@@ -113,9 +110,9 @@ class Page2() :
         self.btn_stat = Button(self.page2, text="Статистика", command=func5)
         self.btn_stat.place(x=geomPar['P2widthW']+20 + 115, y=geomPar['heighY'] + 40 , anchor="w", heigh=30, width=110, bordermode=OUTSIDE)
 
-
-        self.page2_btn_Ras = Button(self.page2, text="Обучиться", command=self.page2_click_btn_Ras())
-        self.page2_btn_Ras.place(x=10, y=geomPar['heighY'] + botBg , anchor="w", heigh=30, width=150, bordermode=OUTSIDE)
+        func6 = lambda: self.page2_click_btn_Ras()
+        self.page2_btn_Ras = Button(self.page2, text="Обучиться", command=func6)
+        self.page2_btn_Ras.place(x=geomPar['P2widthW']+20, y=geomPar['heighY'] + botBg , anchor="w", heigh=30, width=150, bordermode=OUTSIDE)
 
 
 
@@ -189,6 +186,7 @@ class Page2() :
         # ttt = rul_three.sub(' ',ttt)
         self.page2_clear_Text.delete('1.0', END)
         self.page2_clear_Text.insert('1.0', ttt)
+        return ttt
         
 
     def readAllSource(self):
@@ -326,56 +324,56 @@ class Page2() :
 
     def page2_click_btn_Ras(self):
         # learn and get dict fragment of diferetnt
-        
-        is_text = self.page2_lineText_DublSlovo.get('1.0', END + '-1c')
-        print(is_text)
-        statis = Counter()
-        ttt = get_stat_break(is_text).split()
-        kk = 0 
-        len_dd = Counter()
-        list_join = []
-        indItem = 0
-        while indItem < len(ttt):
-            if len(ttt[indItem]) == 1 and indItem <(len(ttt) - 1):
-                if len(ttt[indItem +1]) == 1:
-                    frag = ttt[indItem] + ttt[indItem + 1]
-                    dd[11][frag] = ttt[indItem] + ' ' + ttt[indItem + 1]
-                    ttt.pop(indItem + 1)
-            indItem +=1
-        for tt in ttt: 
-            frag =''
-            if kk+1 < len(ttt):
-                t_n = ttt[kk+1].strip()
-                tt = tt.strip()
-                if len(tt)>=3 and len(ttt[kk+1])>=3:
-                    if len(tt) == 3 and len(ttt[kk + 1])> 3:
-                        frag = (tt + ttt[kk + 1][0:3])
-                    elif len(tt) == 3 and len(ttt[kk + 1]) == 3:
-                        frag = (tt + ttt[kk + 1])
-                    elif len(tt) > 3 and len(ttt[kk + 1]) == 3:
-                        frag = (tt[-3:] + ttt[kk + 1])
-                    elif len(tt) > 3 and len(ttt[kk + 1]) > 3:    
-                        frag = (tt[-3:] + ttt[kk + 1][0:3])
-                    statis[frag] +=1
-                    dd[33][frag] = tt[-3:] + ' '
-                    len_dd[len(frag)] += 1
-                else:
-                    list_join.append(tt +' '+ ttt[kk+1])
 
-            kk += 1
-        for tt in list_join:
-            serviis_list = tt.split()
-            if len(serviis_list[0])>=3 and len(serviis_list[1])==2:
-                dd[32][serviis_list[0][-3:]+serviis_list[1]] = serviis_list[0][-3:]+ ' ' + serviis_list[1]
-            elif len(serviis_list[0]) ==2 and len(serviis_list[1])>=3:
-                dd[23][serviis_list[0]+serviis_list[1][:3]] = serviis_list[0]+ ' ' + serviis_list[1][:3]
-        print('dd[32] = ', dd[32])
-        print('dd[23] = ',dd[23])     
-        print(list_join)
-        text_exp = ''.join(ttt)
-        print()
-        print(text_exp)
-        print('len(ttt) 1 = ',len(ttt))
-        self.page2_lineText_DublSlovo.delete(1.0, END)
-        self.page2_lineText_DublSlovo.insert(INSERT, text_exp)
+        statis = Counter()
+        ttt = self.tokinez().split()
+        print(ttt)
+        text_exp = connectLearn(ttt)
+        # kk = 0 
+        # len_dd = Counter()
+        # list_join = []
+        # indItem = 0
+        # while indItem < len(ttt):
+        #     if len(ttt[indItem]) == 1 and indItem <(len(ttt) - 1):
+        #         if len(ttt[indItem +1]) == 1:
+        #             frag = ttt[indItem] + ttt[indItem + 1]
+        #             dd[11][frag] = ttt[indItem] + ' ' + ttt[indItem + 1]
+        #             ttt.pop(indItem + 1)
+        #     indItem +=1
+        # for tt in ttt: 
+        #     frag =''
+        #     if kk+1 < len(ttt):
+        #         t_n = ttt[kk+1].strip()
+        #         tt = tt.strip()
+        #         if len(tt)>=3 and len(ttt[kk+1])>=3:
+        #             if len(tt) == 3 and len(ttt[kk + 1])> 3:
+        #                 frag = (tt + ttt[kk + 1][0:3])
+        #             elif len(tt) == 3 and len(ttt[kk + 1]) == 3:
+        #                 frag = (tt + ttt[kk + 1])
+        #             elif len(tt) > 3 and len(ttt[kk + 1]) == 3:
+        #                 frag = (tt[-3:] + ttt[kk + 1])
+        #             elif len(tt) > 3 and len(ttt[kk + 1]) > 3:    
+        #                 frag = (tt[-3:] + ttt[kk + 1][0:3])
+        #             statis[frag] +=1
+        #             dd[33][frag] = tt[-3:] + ' '
+        #             len_dd[len(frag)] += 1
+        #         else:
+        #             list_join.append(tt +' '+ ttt[kk+1])
+
+        #     kk += 1
+        # for tt in list_join:
+        #     serviis_list = tt.split()
+        #     if len(serviis_list[0])>=3 and len(serviis_list[1])==2:
+        #         dd[32][serviis_list[0][-3:]+serviis_list[1]] = serviis_list[0][-3:]+ ' ' + serviis_list[1]
+        #     elif len(serviis_list[0]) ==2 and len(serviis_list[1])>=3:
+        #         dd[23][serviis_list[0]+serviis_list[1][:3]] = serviis_list[0]+ ' ' + serviis_list[1][:3]
+        # print('dd[32] = ', dd[32])
+        # print('dd[23] = ',dd[23])     
+        # print(list_join)
+        # text_exp = ''.join(ttt)
+        # print()
+        # print(text_exp)
+        # print('count words = ',len(ttt))
+        self.page2_clear_Text.delete('1.0', END)
+        self.page2_clear_Text.insert('1.0', text_exp)
         
