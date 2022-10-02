@@ -17,8 +17,17 @@ template --> cprint(f'{}' , 'red', attrs=['bold'])
 
 
 def baseConcat(dd:dict, ReserchText:list, key:int, lengthFirstWord:int, ff2:int ):
-    """
+    """_summary_
 
+    Args:
+        dd (dict): _description_
+        ReserchText (list): _description_
+        key (int): _description_
+        lengthFirstWord (int): _description_
+        ff2 (int): _description_
+
+    Returns:
+        _type_: _description_
     """
     indItem = 0
     while indItem < len(ReserchText):
@@ -52,9 +61,9 @@ def connectLearn(ReserchText:list)->str:
     for k in ReserchText:
         rez +=k
     cprint(ReserchText, 'red')
-    dd ={11:{}, 12:{}, 21:{}, 31:{},
-        22:{}, 23:{},
-        33:{}}
+    dd ={11:{'k_l':0}, 12:{'k_l':0}, 21:{'k_l':0}, 31:{'k_l':0},
+        22:{'k_l':0}, 23:{'k_l':0},
+        33:{'k_l':0}}
     # 11
     dd, ReserchText = baseConcat(dd, ReserchText, 11 , 1, 1)
 

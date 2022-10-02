@@ -328,7 +328,7 @@ class Page2() :
         statis = Counter()
         ttt = self.tokinez().split()
         print(ttt)
-        text_exp = connectLearn(ttt)
+        dd, text_exp = connectLearn(ttt)
         # kk = 0 
         # len_dd = Counter()
         # list_join = []
@@ -376,4 +376,6 @@ class Page2() :
         # print('count words = ',len(ttt))
         self.page2_clear_Text.delete('1.0', END)
         self.page2_clear_Text.insert('1.0', text_exp)
+        self.page2_TextPath3.delete('1.0', END)
+        self.page2_TextPath3.insert('1.0', dd) 
         
