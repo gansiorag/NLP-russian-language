@@ -4,7 +4,8 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.filedialog import askopenfilename
 from tkinter import messagebox
-from unicodedata import name
+from datetime import datetime
+import pickle
 
 import os
 import sys
@@ -327,8 +328,7 @@ class Page2() :
 
         statis = Counter()
         ttt = self.tokinez().split()
-        print(ttt)
-        dd, text_exp = connectLearn(ttt)
+        dd, text_exp, ReserchText = connectLearn(ttt)
         # kk = 0 
         # len_dd = Counter()
         # list_join = []
@@ -374,8 +374,23 @@ class Page2() :
         # print()
         # print(text_exp)
         # print('count words = ',len(ttt))
+        strBase = {'nameFileIs':self.page1.nameFile.get("1.0", END).strip()}
+        nameFile = self.page1.nameFile.get("1.0", END).strip().split('/')[-1].split('.')[0] + '_'
+        PathPrjWork = PathPrj+'dividing_continuous_stream_characters_into_words/rezultResearch/'
+        datFile= str(datetime.now()).replace('-', '_').replace(' ', '_').replace(':', '_').split('.')[0]
+        nameFileStream = PathPrjWork + nameFile + 'Stream_' + datFile + '.txt'
+        # print('count words = ',len(ttt))
+        strBase['nameFileStream'] = nameFileStream
+        FileStream = open(nameFileStream, 'w')
+        nameFileVoc = PathPrjWork + nameFile + 'Voc_' + datFile + '.picle'
+        strBase['nameFileVoc'] = nameFileVoc
+        FileVoc = open(nameFileVoc, 'wb')
+        pickle.dump(dd, FileVoc)
+        FileVoc.close()
         self.page2_clear_Text.delete('1.0', END)
-        self.page2_clear_Text.insert('1.0', text_exp)
+        self.page2_clear_Text.insert('1.0', ReserchText[0])
+        FileStream.write(ReserchText[0])
+        FileStream.close()
         self.page2_TextPath3.delete('1.0', END)
         self.page2_TextPath3.insert('1.0', dd) 
         
