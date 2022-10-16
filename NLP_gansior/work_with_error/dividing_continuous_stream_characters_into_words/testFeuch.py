@@ -30,21 +30,22 @@ def baseConcat(dd:dict, ReserchText:list, key:int, lengthFirstWord:int, ff2:int 
         _type_: _description_
     """
     indItem = 0
-    while indItem < len(ReserchText):
-        if len(ReserchText[indItem]) == lengthFirstWord and indItem <(len(ReserchText) - 1):
-            if len(ReserchText[indItem +1]) == ff2:
-                frag = ReserchText[indItem] + ReserchText[indItem + 1]
+    while indItem < len(ReserchText['CountText']):
+        if len(ReserchText['CountText'][indItem]) == lengthFirstWord and indItem <(len(ReserchText['CountText']) - 1):
+            if len(ReserchText['CountText'][indItem +1]) == ff2:
+                frag = ReserchText['CountText'][indItem] + ReserchText['CountText'][indItem + 1]
                 if frag in dd[key]:
                     dd[key][frag]['k_l'] += 1
-                    ReserchText[indItem] = frag
-                    ReserchText.pop(indItem + 1)
+                    ReserchText['CountText'][indItem] = frag
+                    ReserchText['CountText'].pop(indItem + 1)
                 else:
                     dd[key][frag] = {'txt':'', 'k_l':0}
-                    dd[key][frag]['txt'] = ReserchText[indItem] + ' ' + ReserchText[indItem + 1]
+                    dd[key][frag]['txt'] = ReserchText['CountText'][indItem] + ' ' + ReserchText['CountText'][indItem + 1]
                     dd[key][frag]['k_l'] = 1
-                    ReserchText[indItem] = frag
-                    ReserchText.pop(indItem + 1)
+                    ReserchText['CountText'][indItem] = frag
+                    ReserchText['CountText'].pop(indItem + 1)
         indItem +=1
+    ReserchText[key] = ReserchText['CountText'].copy()
     return dd, ReserchText
 
 def baseConcatLong(dd:dict, ReserchText:list, key:int, lengthFirstWord:int, ff2:int ):
@@ -61,20 +62,21 @@ def baseConcatLong(dd:dict, ReserchText:list, key:int, lengthFirstWord:int, ff2:
         _type_: _description_
     """
     indItem = 0
-    while indItem < len(ReserchText):
-        if len(ReserchText[indItem]) >= lengthFirstWord and indItem <(len(ReserchText) - 1):
-            if len(ReserchText[indItem +1]) == ff2:
-                frag = ReserchText[indItem] + ReserchText[indItem + 1]
+    while indItem < len(ReserchText['CountText']):
+        if len(ReserchText['CountText'][indItem]) >= lengthFirstWord and indItem <(len(ReserchText['CountText']) - 1):
+            if len(ReserchText['CountText'][indItem +1]) == ff2:
+                frag = ReserchText['CountText'][indItem] + ReserchText['CountText'][indItem + 1]
                 if frag in dd[key]:
                     dd[key][frag]['k_l'] += 1
-                    ReserchText[indItem] = frag
-                    ReserchText.pop(indItem + 1)
+                    ReserchText['CountText'][indItem] = frag
+                    ReserchText['CountText'].pop(indItem + 1)
                 else:
                     dd[key][frag] = {'txt':'', 'k_l':1}
-                    dd[key][frag]['txt'] = ReserchText[indItem] + ' ' + ReserchText[indItem + 1]
-                    ReserchText[indItem] = frag
-                    ReserchText.pop(indItem + 1)
+                    dd[key][frag]['txt'] = ReserchText['CountText'][indItem] + ' ' + ReserchText['CountText'][indItem + 1]
+                    ReserchText['CountText'][indItem] = frag
+                    ReserchText['CountText'].pop(indItem + 1)
         indItem +=1
+        ReserchText[key] = ReserchText['CountText'].copy()
     return dd, ReserchText
     
 def baseConcat33(dd:dict, ReserchText:list):
@@ -82,56 +84,65 @@ def baseConcat33(dd:dict, ReserchText:list):
 
     """
     indItem = 0
-    while len(ReserchText) > 1:
-        if len(ReserchText[indItem]) >= 3 and indItem <(len(ReserchText) - 1):
-            if len(ReserchText[indItem +1]) >= 3:
-                frag = ReserchText[indItem][-3:] + ReserchText[indItem + 1][0:3]
+    while len(ReserchText['CountText']) > 1:
+        if len(ReserchText['CountText'][indItem]) >= 3 and indItem <(len(ReserchText) - 1):
+            if len(ReserchText['CountText'][indItem +1]) >= 3:
+                frag = ReserchText['CountText'][indItem][-3:] + ReserchText['CountText'][indItem + 1][0:3]
                 if frag in dd[33]:
                     dd[33][frag]['k_l'] += 1
-                    ReserchText[indItem] = ReserchText[indItem] + ReserchText[indItem + 1]
-                    ReserchText.pop(indItem + 1)
+                    ReserchText['CountText'][indItem] = ReserchText['CountText'][indItem] + ReserchText['CountText'][indItem + 1]
+                    ReserchText['CountText'].pop(indItem + 1)
                 else:
                     dd[33][frag] = {'txt':'', 'k_l':1}
-                    dd[33][frag]['txt'] = ReserchText[indItem][-3:] + ' ' + ReserchText[indItem + 1][0:3]
-                    ReserchText[indItem] = ReserchText[indItem] + ReserchText[indItem + 1]
-                    ReserchText.pop(indItem + 1)
+                    dd[33][frag]['txt'] = ReserchText['CountText'][indItem][-3:] + ' ' + ReserchText['CountText'][indItem + 1][0:3]
+                    ReserchText['CountText'][indItem] = ReserchText['CountText'][indItem] + ReserchText['CountText'][indItem + 1]
+                    ReserchText['CountText'].pop(indItem + 1)
+    ReserchText[33] = ReserchText[33].copy()    
     return dd, ReserchText 
 
 
-def connectLearn(ReserchText:list)->str:
+def connectLearn(FirstText:list)->str:
     rez = ''
-    for k in ReserchText:
+    for k in FirstText:
         rez +=k
-    cprint(ReserchText, 'red')
+        
+    Reserches={'FirstText':FirstText.copy(),
+               'CountText':FirstText.copy(),
+               11:[],
+               12:[], 21:[], 21:[], 31:[], 
+               22:[], 23:[], 331:[], 332:[], 33:[],
+               'rez':rez}
+    
+    cprint(Reserches['FirstText'], 'red')
     dd ={11:{}, 12:{}, 21:{}, 31:{},
         22:{}, 23:{}, 331:{}, 332:{},
         33:{}}
     # 11
-    dd, ReserchText = baseConcat(dd, ReserchText, 11 , 1, 1)
+    dd, Reserches = baseConcat(dd, Reserches, 11 , 1, 1)
 
     # 12
-    dd, ReserchText = baseConcat(dd, ReserchText, 12 , 1, 2)
+    dd, Reserches = baseConcat(dd, Reserches, 12 , 1, 2)
 
     # 21
-    dd, ReserchText = baseConcat(dd, ReserchText, 21 , 2, 1)
+    dd, Reserches = baseConcat(dd, Reserches, 21 , 2, 1)
  
     # 31
-    dd, ReserchText = baseConcat(dd, ReserchText, 31 , 3, 1)
+    dd, Reserches = baseConcat(dd, Reserches, 31 , 3, 1)
   
     # 22
-    dd, ReserchText = baseConcat(dd, ReserchText, 22 , 2, 2)
+    dd, Reserches = baseConcat(dd, Reserches, 22 , 2, 2)
   
     # 23
-    dd, ReserchText = baseConcat(dd, ReserchText, 23 , 2, 3)
+    dd, Reserches = baseConcat(dd, Reserches, 23 , 2, 3)
     
     # 331 long 3
-    dd, ReserchText = baseConcatLong(dd, ReserchText, 331 , 3, 1)
+    dd, Reserches = baseConcatLong(dd, Reserches, 331 , 3, 1)
     
     # 332 long 3
-    dd, ReserchText = baseConcatLong(dd, ReserchText, 332 , 3, 2)
- 
+    dd, Reserches = baseConcatLong(dd, Reserches, 332 , 3, 2)
+
     # 33
-    dd, ReserchText = baseConcat33(dd, ReserchText)
+    dd, Reserches = baseConcat33(dd, Reserches)
     #print(ReserchText)
     #print(dd)
     # 33
@@ -139,7 +150,7 @@ def connectLearn(ReserchText:list)->str:
     # print(ReserchText)
     # print(rez)
     # print(dd)
-    return dd, rez, ReserchText
+    return dd, rez, Reserches, Reserches[332]
 
 
 def baseSeparator(is_list:str, baseDict:dict, indDict:int, firstStep:int, secondStep:int):

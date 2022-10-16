@@ -134,7 +134,20 @@ class Page2() :
             textOut +=(f'{k[0]:12}  -----  {k[1]:8}\n')
         self.page2_TextPath3.insert('1.0', textOut)        
 
-
+    def statTextList(self,textList):
+        stat = Counter()
+        for word in textList:
+            stat[len(word)] +=1
+        stat.most_common()
+        print(stat)
+        self.page2_TextPath3.delete('1.0', END)
+        textOut = ' длина слова  -----  кол.слов\n'
+        for k in stat.most_common():
+            textOut +=(f'{k[0]:12}  -----  {k[1]:8}\n')
+        self.page2_TextPath3.delete('1.0', END)
+        self.page2_TextPath3.insert('1.0', textOut) 
+        
+        
     def tokinez(self):
         """
         This module clear document of all bad simbols and 
@@ -328,7 +341,12 @@ class Page2() :
 
         statis = Counter()
         ttt = self.tokinez().split()
-        dd, text_exp, ReserchText = connectLearn(ttt)
+        
+        # lead module count dictionary
+        dd, text_exp, ReserchText, ReserchText332 = connectLearn(ttt)
+        
+        self.statTextList(ReserchText332)
+        print(ReserchText332)
         # kk = 0 
         # len_dd = Counter()
         # list_join = []
@@ -388,9 +406,9 @@ class Page2() :
         pickle.dump(dd, FileVoc)
         FileVoc.close()
         self.page2_clear_Text.delete('1.0', END)
-        self.page2_clear_Text.insert('1.0', ReserchText[0])
-        FileStream.write(ReserchText[0])
+        self.page2_clear_Text.insert('1.0', ReserchText['CountText'])
+        FileStream.write(ReserchText['CountText'])
         FileStream.close()
-        self.page2_TextPath3.delete('1.0', END)
-        self.page2_TextPath3.insert('1.0', dd) 
+        # self.page2_TextPath3.delete('1.0', END)
+        # self.page2_TextPath3.insert('1.0', dd) 
         
