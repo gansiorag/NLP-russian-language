@@ -14,8 +14,19 @@ Text highlights: on_grey on_red on_green on_yellow on_blue on_magenta on_cyan on
 Attributes: bold dark underline blink reverse concealed
 template --> cprint(f'{}' , 'red', attrs=['bold'])
 '''
+from collections import Counter
 
-
+def statTextList(textList):
+    stat = Counter()
+    for word in textList:
+        stat[len(word)] +=1
+    stat.most_common()
+    # ' длина слова  -----  кол.слов'
+    textOut = []
+    for k in stat.most_common():
+        textOut.append([k[0],k[1]])
+    return textOut
+        
 def baseConcat(dd:dict, ReserchText:list, key:int, lengthFirstWord:int, ff2:int ):
     """_summary_
 
@@ -45,7 +56,8 @@ def baseConcat(dd:dict, ReserchText:list, key:int, lengthFirstWord:int, ff2:int 
                     ReserchText['CountText'][indItem] = frag
                     ReserchText['CountText'].pop(indItem + 1)
         indItem +=1
-    ReserchText[key] = ReserchText['CountText'].copy()
+    ReserchText[key]['CountText'] = ReserchText['CountText'].copy()
+    ReserchText[key]['stat'] = statTextList(ReserchText['CountText'])
     return dd, ReserchText
 
 def baseConcatLong(dd:dict, ReserchText:list, key:int, lengthFirstWord:int, ff2:int ):
@@ -76,7 +88,8 @@ def baseConcatLong(dd:dict, ReserchText:list, key:int, lengthFirstWord:int, ff2:
                     ReserchText['CountText'][indItem] = frag
                     ReserchText['CountText'].pop(indItem + 1)
         indItem +=1
-        ReserchText[key] = ReserchText['CountText'].copy()
+    ReserchText[key]['CountText'] = ReserchText['CountText'].copy()
+    ReserchText[key]['stat'] = statTextList(ReserchText['CountText'])
     return dd, ReserchText
     
 def baseConcat33(dd:dict, ReserchText:list):
@@ -97,7 +110,8 @@ def baseConcat33(dd:dict, ReserchText:list):
                     dd[33][frag]['txt'] = ReserchText['CountText'][indItem][-3:] + ' ' + ReserchText['CountText'][indItem + 1][0:3]
                     ReserchText['CountText'][indItem] = ReserchText['CountText'][indItem] + ReserchText['CountText'][indItem + 1]
                     ReserchText['CountText'].pop(indItem + 1)
-    ReserchText[33] = ReserchText[33].copy()    
+    ReserchText[33]['CountText'] = ReserchText['CountText'].copy()
+    ReserchText[33]['stat'] = statTextList(ReserchText['CountText'])   
     return dd, ReserchText 
 
 
@@ -108,9 +122,27 @@ def connectLearn(FirstText:list)->str:
         
     Reserches={'FirstText':FirstText.copy(),
                'CountText':FirstText.copy(),
-               11:[],
-               12:[], 21:[], 21:[], 31:[], 
-               22:[], 23:[], 331:[], 332:[], 33:[],
+               11:{'CountText':[],
+                   'stat':[]},
+               12:{'CountText':[],
+                   'stat':[]}, 
+               21:{'CountText':[],
+                   'stat':[]},
+               21:{'CountText':[],
+                   'stat':[]},
+               31:{'CountText':[],
+                   'stat':[]},
+               
+               22:{'CountText':[],
+                   'stat':[]},
+               23:{'CountText':[],
+                   'stat':[]},
+               331:{'CountText':[],
+                   'stat':[]},
+               332:{'CountText':[],
+                   'stat':[]},
+               33:{'CountText':[],
+                   'stat':[]},
                'rez':rez}
     
     cprint(Reserches['FirstText'], 'red')

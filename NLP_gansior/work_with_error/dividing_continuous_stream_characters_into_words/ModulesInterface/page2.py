@@ -1,3 +1,4 @@
+from base64 import encode
 import re
 from collections import Counter
 from tkinter import *
@@ -6,6 +7,7 @@ from tkinter.filedialog import askopenfilename
 from tkinter import messagebox
 from datetime import datetime
 import pickle
+import json
 
 import os
 import sys
@@ -392,14 +394,17 @@ class Page2() :
         # print()
         # print(text_exp)
         # print('count words = ',len(ttt))
+        
+        # define name file rezult work
         strBase = {'nameFileIs':self.page1.nameFile.get("1.0", END).strip()}
         nameFile = self.page1.nameFile.get("1.0", END).strip().split('/')[-1].split('.')[0] + '_'
         PathPrjWork = PathPrj+'dividing_continuous_stream_characters_into_words/rezultResearch/'
         datFile= str(datetime.now()).replace('-', '_').replace(' ', '_').replace(':', '_').split('.')[0]
         nameFileStream = PathPrjWork + nameFile + 'Stream_' + datFile + '.txt'
+        
         # print('count words = ',len(ttt))
         strBase['nameFileStream'] = nameFileStream
-        FileStream = open(nameFileStream, 'w')
+        FileStream = open(nameFileStream, 'w', encoding='utf-8')
         nameFileVoc = PathPrjWork + nameFile + 'Voc_' + datFile + '.picle'
         strBase['nameFileVoc'] = nameFileVoc
         FileVoc = open(nameFileVoc, 'wb')
@@ -407,7 +412,7 @@ class Page2() :
         FileVoc.close()
         self.page2_clear_Text.delete('1.0', END)
         self.page2_clear_Text.insert('1.0', ReserchText['CountText'])
-        FileStream.write(ReserchText['CountText'])
+        json.dump(ReserchText,FileStream, ensure_ascii=False)
         FileStream.close()
         # self.page2_TextPath3.delete('1.0', END)
         # self.page2_TextPath3.insert('1.0', dd) 
