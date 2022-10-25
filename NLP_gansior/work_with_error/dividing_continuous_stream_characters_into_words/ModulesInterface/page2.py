@@ -117,6 +117,9 @@ class Page2() :
         self.page2_btn_Ras = Button(self.page2, text="Обучиться", command=func6)
         self.page2_btn_Ras.place(x=geomPar['P2widthW']+20, y=geomPar['heighY'] + botBg , anchor="w", heigh=30, width=150, bordermode=OUTSIDE)
 
+        func7 = lambda: self.page2_click_btn_Ras()
+        self.page2_btn_Unm = Button(self.page2, text="Разделить", command=func7)
+        self.page2_btn_Unm.place(x=geomPar['P2widthW']+180, y=geomPar['heighY'] + botBg , anchor="w", heigh=30, width=150, bordermode=OUTSIDE)
 
 
         # self.page2_btn_Kontext = Button(self.page2, text="Разделить текст", command=self.page2_click_btn_Kontext())
