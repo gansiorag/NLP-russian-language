@@ -60,7 +60,7 @@ def baseConcat(dd:dict, ReserchText:list, key:int, lengthFirstWord:int, ff2:int 
     ReserchText[key]['stat'] = statTextList(ReserchText['CountText'])
     return dd, ReserchText
 
-def baseConcatLong(dd:dict, ReserchText:list, key:int, lengthFirstWord:int, ff2:int ):
+def baseConcatLong(dd:dict, ReserchText:list, lengthFirstWord:int, ff2:int ):
     """_summary_
 
     Args:
@@ -74,19 +74,22 @@ def baseConcatLong(dd:dict, ReserchText:list, key:int, lengthFirstWord:int, ff2:
         _type_: _description_
     """
     indItem = 0
+    key = lengthFirstWord*10 + ff2
     while indItem < len(ReserchText['CountText']):
-        if len(ReserchText['CountText'][indItem]) >= lengthFirstWord and indItem <(len(ReserchText['CountText']) - 1):
-            if len(ReserchText['CountText'][indItem +1]) == ff2:
-                frag = ReserchText['CountText'][indItem] + ReserchText['CountText'][indItem + 1]
-                if frag in dd[key]:
-                    dd[key][frag]['k_l'] += 1
-                    ReserchText['CountText'][indItem] = frag
-                    ReserchText['CountText'].pop(indItem + 1)
-                else:
-                    dd[key][frag] = {'txt':'', 'k_l':1}
-                    dd[key][frag]['txt'] = ReserchText['CountText'][indItem] + ' ' + ReserchText['CountText'][indItem + 1]
-                    ReserchText['CountText'][indItem] = frag
-                    ReserchText['CountText'].pop(indItem + 1)
+        match key:
+            case 11:
+                if len(ReserchText['CountText'][indItem]) == lengthFirstWord and indItem <(len(ReserchText['CountText']) - 1):
+                    if len(ReserchText['CountText'][indItem +1]) == ff2:
+                        frag = ReserchText['CountText'][indItem] + ReserchText['CountText'][indItem + 1]
+                        if frag in dd[key]:
+                            dd[key][frag]['k_l'] += 1
+                            ReserchText['CountText'][indItem] = frag
+                            ReserchText['CountText'].pop(indItem + 1)
+                        else:
+                            dd[key][frag] = {'txt':'', 'k_l':1}
+                            dd[key][frag]['txt'] = ReserchText['CountText'][indItem] + ' ' + ReserchText['CountText'][indItem + 1]
+                            ReserchText['CountText'][indItem] = frag
+                            ReserchText['CountText'].pop(indItem + 1)
         indItem +=1
     ReserchText[key]['CountText'] = ReserchText['CountText'].copy()
     ReserchText[key]['stat'] = statTextList(ReserchText['CountText'])
@@ -122,26 +125,26 @@ def connectLearn(FirstText:list)->str:
         
     Reserches={'FirstText':FirstText.copy(),
                'CountText':FirstText.copy(),
-               11:{'CountText':[],
+                11:{'CountText':[],
                    'stat':[]},
-               12:{'CountText':[],
+                12:{'CountText':[],
                    'stat':[]}, 
-               21:{'CountText':[],
+                13:{'CountText':[],
                    'stat':[]},
-               21:{'CountText':[],
-                   'stat':[]},
-               31:{'CountText':[],
+                14:{'CountText':[],
                    'stat':[]},
                
-               22:{'CountText':[],
+                22:{'CountText':[],
                    'stat':[]},
-               23:{'CountText':[],
+                23:{'CountText':[],
                    'stat':[]},
-               331:{'CountText':[],
+                24:{'CountText':[],
                    'stat':[]},
-               332:{'CountText':[],
+                33:{'CountText':[],
                    'stat':[]},
-               33:{'CountText':[],
+                34:{'CountText':[],
+                   'stat':[]},
+                44:{'CountText':[],
                    'stat':[]},
                'rez':rez}
     
@@ -155,8 +158,8 @@ def connectLearn(FirstText:list)->str:
     # 12
     dd, Reserches = baseConcat(dd, Reserches, 12 , 1, 2)
 
-    # 21
-    dd, Reserches = baseConcat(dd, Reserches, 21 , 2, 1)
+    # 13
+    dd, Reserches = baseConcat(dd, Reserches, 21 , 1, 3)
  
     # 31
     dd, Reserches = baseConcat(dd, Reserches, 31 , 3, 1)
