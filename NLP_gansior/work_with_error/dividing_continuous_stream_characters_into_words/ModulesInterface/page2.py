@@ -348,10 +348,10 @@ class Page2() :
         ttt = self.tokinez().split()
         
         # lead module count dictionary
-        dd, text_exp, ReserchText, ReserchText332 = connectLearn(ttt)
-        
-        self.statTextList(ReserchText332)
-        print(ReserchText332)
+        #dd, text_exp, ReserchText, ReserchText332 = connectLearn(ttt)
+        dd, text_exp, ReserchText = connectLearn(ttt)
+        #self.statTextList(ReserchText332)
+        print(ReserchText)
         # kk = 0 
         # len_dd = Counter()
         # list_join = []
@@ -414,7 +414,7 @@ class Page2() :
         pickle.dump(dd, FileVoc)
         FileVoc.close()
         self.page2_clear_Text.delete('1.0', END)
-        self.page2_clear_Text.insert('1.0', ReserchText['CountText'])
+        self.page2_clear_Text.insert('1.0', ReserchText['rez'])
         json.dump(ReserchText,FileStream, ensure_ascii=False)
         FileStream.close()
         # self.page2_TextPath3.delete('1.0', END)

@@ -27,40 +27,40 @@ def statTextList(textList):
         textOut.append([k[0],k[1]])
     return textOut
         
-def baseConcat(dd:dict, ReserchText:list, key:int, lengthFirstWord:int, ff2:int ):
-    """_summary_
+# def baseConcat(dd:dict, ReserchText:list, key:int, lengthFirstWord:int, ff2:int ):
+#     """_summary_
 
-    Args:
-        dd (dict): _description_
-        ReserchText (list): _description_
-        key (int): _description_
-        lengthFirstWord (int): _description_
-        ff2 (int): _description_
+#     Args:
+#         dd (dict): _description_
+#         ReserchText (list): _description_
+#         key (int): _description_
+#         lengthFirstWord (int): _description_
+#         ff2 (int): _description_
 
-    Returns:
-        _type_: _description_
-    """
-    indItem = 0
-    while indItem < len(ReserchText['CountText']):
-        if len(ReserchText['CountText'][indItem]) == lengthFirstWord and indItem <(len(ReserchText['CountText']) - 1):
-            if len(ReserchText['CountText'][indItem +1]) == ff2:
-                frag = ReserchText['CountText'][indItem] + ReserchText['CountText'][indItem + 1]
-                if frag in dd[key]:
-                    dd[key][frag]['k_l'] += 1
-                    ReserchText['CountText'][indItem] = frag
-                    ReserchText['CountText'].pop(indItem + 1)
-                else:
-                    dd[key][frag] = {'txt':'', 'k_l':0}
-                    dd[key][frag]['txt'] = ReserchText['CountText'][indItem] + ' ' + ReserchText['CountText'][indItem + 1]
-                    dd[key][frag]['k_l'] = 1
-                    ReserchText['CountText'][indItem] = frag
-                    ReserchText['CountText'].pop(indItem + 1)
-        indItem +=1
-    ReserchText[key]['CountText'] = ReserchText['CountText'].copy()
-    ReserchText[key]['stat'] = statTextList(ReserchText['CountText'])
-    return dd, ReserchText
+#     Returns:
+#         _type_: _description_
+#     """
+#     indItem = 0
+#     while indItem < len(ReserchText['CountText']):
+#         if len(ReserchText['CountText'][indItem]) == lengthFirstWord and indItem <(len(ReserchText['CountText']) - 1):
+#             if len(ReserchText['CountText'][indItem +1]) == ff2:
+#                 frag = ReserchText['CountText'][indItem] + ReserchText['CountText'][indItem + 1]
+#                 if frag in dd[key]:
+#                     dd[key][frag]['k_l'] += 1
+#                     ReserchText['CountText'][indItem] = frag
+#                     ReserchText['CountText'].pop(indItem + 1)
+#                 else:
+#                     dd[key][frag] = {'txt':'', 'k_l':0}
+#                     dd[key][frag]['txt'] = ReserchText['CountText'][indItem] + ' ' + ReserchText['CountText'][indItem + 1]
+#                     dd[key][frag]['k_l'] = 1
+#                     ReserchText['CountText'][indItem] = frag
+#                     ReserchText['CountText'].pop(indItem + 1)
+#         indItem +=1
+#     ReserchText[key]['CountText'] = ReserchText['CountText'].copy()
+#     ReserchText[key]['stat'] = statTextList(ReserchText['CountText'])
+#     return dd, ReserchText
 
-def baseConcatLong(dd:dict, ReserchText:list, lengthFirstWord:int, ff2:int ):
+def baseConcat(dd:dict, ReserchText:list, lengthFirstWord:int, ff2:int ):
     """_summary_
 
     Args:
@@ -75,6 +75,7 @@ def baseConcatLong(dd:dict, ReserchText:list, lengthFirstWord:int, ff2:int ):
     """
     indItem = 0
     key = lengthFirstWord*10 + ff2
+    print('key =', key)
     while indItem < len(ReserchText['CountText']):
         match key:
             case 44:
@@ -99,7 +100,7 @@ def baseConcatLong(dd:dict, ReserchText:list, lengthFirstWord:int, ff2:int ):
                             dd[key][frag]['txt'] = ReserchText['CountText'][indItem] + ' ' + ReserchText['CountText'][indItem + 1][:4]
                         ReserchText['CountText'][indItem] = ReserchText['CountText'][indItem] + ReserchText['CountText'][indItem + 1]
                         ReserchText['CountText'].pop(indItem + 1)
-            case _ :
+            case 11,12,13,22,23,33:
                 if len(ReserchText['CountText'][indItem]) == lengthFirstWord and indItem <(len(ReserchText['CountText']) - 1):
                     if len(ReserchText['CountText'][indItem +1]) == ff2:
                         frag = ReserchText['CountText'][indItem] + ReserchText['CountText'][indItem + 1]
@@ -202,14 +203,14 @@ def connectLearn(FirstText:list)->str:
     # 44
     dd, Reserches = baseConcat(dd, Reserches, 4, 4)
     
-    # 331 long 3
-    dd, Reserches = baseConcatLong(dd, Reserches, 331 , 3, 1)
+    # # 331 long 3
+    # dd, Reserches = baseConcatLong(dd, Reserches, 331 , 3, 1)
     
-    # 332 long 3
-    dd, Reserches = baseConcatLong(dd, Reserches, 332 , 3, 2)
+    # # 332 long 3
+    # dd, Reserches = baseConcatLong(dd, Reserches, 332 , 3, 2)
 
     # 33
-    dd, Reserches = baseConcat33(dd, Reserches)
+    #dd, Reserches = baseConcat33(dd, Reserches)
     #print(ReserchText)
     #print(dd)
     # 33
@@ -217,7 +218,7 @@ def connectLearn(FirstText:list)->str:
     # print(ReserchText)
     # print(rez)
     # print(dd)
-    return dd, rez, Reserches, Reserches[332]
+    return dd, rez, Reserches #, Reserches[332]
 
 
 def baseSeparator(is_list:str, baseDict:dict, indDict:int, firstStep:int, secondStep:int):
