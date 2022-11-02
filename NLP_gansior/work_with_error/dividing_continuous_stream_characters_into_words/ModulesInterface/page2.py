@@ -351,7 +351,7 @@ class Page2() :
         #dd, text_exp, ReserchText, ReserchText332 = connectLearn(ttt)
         dd, text_exp, ReserchText = connectLearn(ttt)
         #self.statTextList(ReserchText332)
-        print(ReserchText)
+        #print(ReserchText)
         # kk = 0 
         # len_dd = Counter()
         # list_join = []
