@@ -120,10 +120,10 @@ def connectLearn(FirstText:list)->str:
                 44:{'CountText':[],
                    'stat':[]},
                'rez':rez}
-    print(type(FirstText))
+    #print(type(FirstText))
     Reserches['FirstTextStat'] = statTextList(FirstText)
-    print("Reserches['FirstTextStat']  = ", Reserches['FirstTextStat'] )
-    cprint(Reserches['FirstText'], 'red')
+    #print("Reserches['FirstTextStat']  = ", Reserches['FirstTextStat'] )
+    #cprint(Reserches['FirstText'], 'red')
     dd ={11:{}, 12:{}, 13:{}, 14:{},
         22:{}, 23:{}, 24:{}, 33:{}, 34:{}, 44:{}, 331:{}, 332:{},
         }
@@ -160,10 +160,11 @@ def connectLearn(FirstText:list)->str:
     return dd, rez, Reserches #, Reserches[332]
 
 
-def baseSeparator(is_list:str, baseDict:dict, firstStep:int, secondStep:int):
+def baseSeparator(is_text:str, baseDict:dict, firstStep:int, secondStep:int):
     # # разделение 2 - 1
-    is_list = is_list.strip().split()
+    is_list = is_text.strip().split()
     text_rez = ''
+    #print(' is_list ======= ', is_list)
     indDict = firstStep * 10 + secondStep
     match secondStep:
         case 4:
@@ -173,16 +174,16 @@ def baseSeparator(is_list:str, baseDict:dict, firstStep:int, secondStep:int):
                         kk = firstStep + secondStep
                         st =0
                         frrControl = ''
-                        print(f' frr = {frr}')
+                        #print(f' frr = {frr}')
                         if len(baseDict[indDict])>0:
                             while kk<=(len(frr)):
                                 frag = frr[st:kk]
-                                print(frag, st, kk)
+                                #print(frag, st, kk)
 
                                 if frag in baseDict[indDict]:
-                                    print(f'in dict frag = {frag}')
+                                    #print(f'in dict frag = {frag}')
                                     frrControl += frr[st:st + firstStep]
-                                    text_rez += ' ' + frr[st:st + firstStep] + ' '
+                                    text_rez += frr[st:st + firstStep] + ' '
                                     st = st+firstStep
                                     kk = st + firstStep + secondStep
                                 else:
@@ -199,6 +200,43 @@ def baseSeparator(is_list:str, baseDict:dict, firstStep:int, secondStep:int):
                             text_rez += frr
                     else:
                         text_rez +=(' '+ frr + ' ')
+            else:
+                for frr in is_list:
+                    if len(frr)>(firstStep + secondStep):
+                        kk = firstStep + secondStep
+                        st =0
+                        frrControl = ''
+                        #print(f' frr = {frr}')
+                        if len(baseDict[indDict])>0:
+                            while kk<=(len(frr)):
+                                frag = frr[st:kk]
+                                #print(frag, st, kk)
+
+                                if frag in baseDict[indDict]:
+                                    #print(f'in dict frag = {frag}')
+                                    frrControl += frr[st:st + firstStep]
+                                    text_rez += ' ' + frr[st:st + firstStep] + ' '
+                                    st = st+firstStep
+                                    kk = st + firstStep + secondStep
+                                else:
+                                    text_rez += frr[st]
+                                    frrControl += frr[st]
+                                    st +=1
+                                    kk += 1
+                                if kk > len(frr): 
+                                    text_rez += frr[st:] + ' '
+                                    frrControl += frr[st:]
+                        if len(frrControl) < len(frr):
+                            text_rez += frr[len(frrControl):]
+                    elif len(frr)==(firstStep + secondStep):
+                        if frr in baseDict[indDict]:
+                            text_rez += ' ' + baseDict[indDict][frr]['txt'] + ' '
+                        else:
+                            text_rez += ' ' + frr + ' '
+                    else:
+                        text_rez +=(' '+ frr + ' ')
+
+            
         case 1 | 2 | 3 :
             for frr in is_list:
                 if len(frr)>(firstStep + secondStep):
@@ -212,8 +250,8 @@ def baseSeparator(is_list:str, baseDict:dict, firstStep:int, secondStep:int):
                             #print(frag, st, kk)
 
                             if frag in baseDict[indDict]:
-                                frrControl += frr[st:st + firstStep]
-                                text_rez += baseDict[indDict][frag]['txt'] + ' '
+                                frrControl += frr[st:st + firstStep + secondStep]
+                                text_rez += ' ' + baseDict[indDict][frag]['txt'] + ' '
                                 st = st+firstStep + secondStep
                                 kk = st+1
                             else:
@@ -221,15 +259,18 @@ def baseSeparator(is_list:str, baseDict:dict, firstStep:int, secondStep:int):
                                 frrControl += frr[st]
                                 st +=1
                                 kk += 1
+                            if kk > len(frr): 
+                                text_rez += frr[st:] + ' '
+                                frrControl += frr[st:]                                
                     if len(frrControl) < len(frr):
-                        text_rez += frr[len(frrControl):]
+                        text_rez += frr[len(frrControl):]  + ' '
                 elif len(frr)==(firstStep + secondStep):
                     if frr in baseDict[indDict]:
-                        text_rez += baseDict[indDict][frr]['txt']
+                        text_rez +=  baseDict[indDict][frr]['txt'] + ' '
                     else:
                         text_rez +=(frr + ' ')
                 else:
-                    text_rez +=(' '+ frr + ' ')
+                    text_rez +=(' ' + frr + ' ')
     return text_rez
 
 
@@ -242,43 +283,43 @@ def separatorWords(sourceText:str, dictFr:dict) ->list:
 
     # # разделение 4 - 4
     text_rez = baseSeparator(sourceText, dictFr, 4, 4)
-    print('text_rez 44 = ', text_rez)
+    #print('text_rez 44 = ', text_rez)
     
     # # разделение 3 - 4
     text_rez = baseSeparator(text_rez, dictFr, 3, 4)
-    print('text_rez 34 = ', text_rez)
+    #print('text_rez 34 = ', text_rez)
 
     # # разделение 3 - 3
     text_rez = baseSeparator(text_rez, dictFr, 3, 3)
-    print('text_rez 33 = ', text_rez)
+    #print('text_rez 33 = ', text_rez)
     
     # # разделение 2 - 4
     text_rez = baseSeparator(text_rez, dictFr, 2, 4)
-    print('text_rez 2 - 4 = ', text_rez)
+    #print('text_rez 2 - 4 = ', text_rez)
     
     # # разделение 2 - 3
     text_rez = baseSeparator(text_rez, dictFr, 2, 3)
-    print('text_rez 2 - 3 = ', text_rez)
+    #print('text_rez 2 - 3 = ', text_rez)
     
     # # разделение 2 - 2
-    text_rez = baseSeparator(text_rez, dictFr, 2, 2)
-    print('text_rez 2 - 2 = ', text_rez)
+    #text_rez = baseSeparator(text_rez, dictFr, 2, 2)
+    #print('text_rez 2 - 2 = ', text_rez)
     
         # # разделение 1 - 4
     text_rez = baseSeparator(text_rez, dictFr, 1, 4)
-    print('text_rez 1 - 4 = ', text_rez)
+    #print('text_rez 1 - 4 = ', text_rez)
     
         # # разделение 1 - 3
-    text_rez = baseSeparator(text_rez, dictFr, 1, 3)
-    print('text_rez 1 - 3 = ', text_rez)
+    #text_rez = baseSeparator(text_rez, dictFr, 1, 3)
+    #print('text_rez 1 - 3 = ', text_rez)
     
         # # разделение 1 - 2
-    text_rez = baseSeparator(text_rez, dictFr, 1, 2)
-    print('text_rez 1 - 2 = ', text_rez)
+    #text_rez = baseSeparator(text_rez, dictFr, 1, 2)
+    #print('text_rez 1 - 2 = ', text_rez)
     
         # # разделение 1 - 1
-    text_rez = baseSeparator(text_rez, dictFr, 1, 1)
-    print('text_rez 1 1 = ', text_rez)
+    #text_rez = baseSeparator(text_rez, dictFr, 1, 1)
+    #print('text_rez 1 1 = ', text_rez)
     
     
     return text_rez
