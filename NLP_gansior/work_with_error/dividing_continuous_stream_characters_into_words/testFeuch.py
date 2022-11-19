@@ -290,7 +290,7 @@ def separatorWords(sourceText:str, dictFr:dict) ->list:
     #print('text_rez 34 = ', text_rez)
 
     # # разделение 3 - 3
-    text_rez = baseSeparator(text_rez, dictFr, 3, 3)
+    #text_rez = baseSeparator(text_rez, dictFr, 3, 3)
     #print('text_rez 33 = ', text_rez)
     
     # # разделение 2 - 4
@@ -298,7 +298,7 @@ def separatorWords(sourceText:str, dictFr:dict) ->list:
     #print('text_rez 2 - 4 = ', text_rez)
     
     # # разделение 2 - 3
-    text_rez = baseSeparator(text_rez, dictFr, 2, 3)
+    #text_rez = baseSeparator(text_rez, dictFr, 2, 3)
     #print('text_rez 2 - 3 = ', text_rez)
     
     # # разделение 2 - 2
