@@ -23,7 +23,7 @@ class Scraper():
     def scrape_links(self, url):
 
         scroll_pause_time = 1
-
+        print('url url ====>>  ', url)
         driver = webdriver.Firefox()
         driver.get(url)
         driver.maximize_window()
