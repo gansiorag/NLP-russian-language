@@ -16,7 +16,6 @@ import json
 
 from testFeuch import connectLearn, separatorWords
 from ModulesInterface.baseModul import geom_par, var_sit
-from ModulesInterface.page1 import Page1
 
 
 nameProjectStart = 'NLP-russian-language'
@@ -57,25 +56,11 @@ class page_pred_work():
 
     def __init__(self, Osn) -> None:
 
-        self.page1 = Page1(Osn)
-
         self.page2 = Frame(Osn)
-        Osn.add(self.page2, text='  Разделение строки по словам  ')
-
-        self.page2_label_Path3 = Label(self.page2, text="Результат")
-        self.page2_label_Path3.place(
-            x=1150, y=geom_par['heighY']+10,
-            anchor="w", heigh=20, width=150,
-            bordermode=OUTSIDE)
-
-        self.page2_TextPath3 = Text(self.page2)
-        self.page2_TextPath3.place(x=geom_par['P2widthW']*2 + 30,
-                                   y=geom_par['heighY'] + 60,
-                                   anchor="nw",
-                                   heigh=500,
-                                   width=geom_par['P2widthW'],
-                                   bordermode=OUTSIDE)
-
+        # ширина окон
+        y_st_text = geom_par['P2widthW']
+        # высота расположения окон
+        у_hihg = geom_par['heighY'] + 260
         # First colunm =======================================================
 
         self.page2_label_Nom2_Slovo = Label(self.page2, text="Исходный текст")
@@ -112,9 +97,9 @@ class page_pred_work():
             width=150, bordermode=OUTSIDE)
 
         self.page2_lineText_DublSlovo = Text(self.page2)  # all text
-        self.page2_lineText_DublSlovo.place(x=10, y=geom_par['heighY'] + 60,
+        self.page2_lineText_DublSlovo.place(x=10, y=у_hihg,
                                             anchor="nw", heigh=500,
-                                            width=geom_par['P2widthW'],
+                                            width=y_st_text,
                                             bordermode=OUTSIDE)
 
         botBg = 590
@@ -123,9 +108,9 @@ class page_pred_work():
 
         self.page2_clear_Text = Text(self.page2)
         self.page2_clear_Text.place(x=geom_par['P2widthW']+20,
-                                    y=geom_par['heighY'] + 60,
+                                    y=у_hihg,
                                     anchor="nw", heigh=500,
-                                    width=geom_par['P2widthW'],
+                                    width=y_st_text,
                                     bordermode=OUTSIDE)
 
         def func4(): return self.tokinez()
@@ -161,6 +146,21 @@ class page_pred_work():
         # command=self.page2_click_btn_Kontext())
         # self.page2_btn_Kontext.place(x=340, y=geom_par['heighY']+botBg ,
         # anchor="w", heigh=30, width=150, bordermode=OUTSIDE)
+
+        self.page2_label_Path3 = Label(self.page2, text="Результат")
+        self.page2_label_Path3.place(
+            x=1150, y=geom_par['heighY']+10,
+            anchor="w", heigh=20, width=150,
+            bordermode=OUTSIDE)
+
+
+        self.page2_TextPath3 = Text(self.page2)
+        self.page2_TextPath3.place(x=geom_par['P2widthW']*2 + 30,
+                                   y=у_hihg,
+                                   anchor="nw",
+                                   heigh=500,
+                                   width=y_st_text,
+                                   bordermode=OUTSIDE)
 
     def statText(self):
         IsTxt = self.page2_clear_Text.get('1.0', END)
@@ -243,7 +243,6 @@ class page_pred_work():
         return ttt
 
     def readAllSource(self):
-        # nameFile = self.page1.nameFile.get("1.0", END).strip()
         nameFile = var_sit['name_file']
         print('readAllSource ', var_sit)
         # sys.path.append(nameFile)

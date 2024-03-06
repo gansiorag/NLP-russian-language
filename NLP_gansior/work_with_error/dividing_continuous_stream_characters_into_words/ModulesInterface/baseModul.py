@@ -19,7 +19,7 @@ Ending 2022//
 # cprint(PathPrj, 'blue')
 # sys.path.append(PathPrj)
 
-geom_par = {'rootGeometry': "1750x700",
+geom_par = {'rootGeometry': "1750x900",
             'widthLabe': 500,
             'widthBt': 300,
             'heighY': 10,
