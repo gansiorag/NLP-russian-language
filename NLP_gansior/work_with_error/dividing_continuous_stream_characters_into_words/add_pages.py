@@ -27,10 +27,10 @@ def add_page(osn_loc, name_p: str, text: str):
             page_loc = ppp.page1
         case 'page_pred_work':
             ppp = page_pred_work(osn_loc)
-            page_loc = ppp.page2
+            page_loc = ppp.page_base
         case 'searches_sources':
             ppp = search_s(osn_loc)
-            page_loc = ppp.page2
+            page_loc = ppp.page_base
             # page_loc = osn_loc.add(pppp, text=text)
         case 'searches_dict':
             page_loc = Frame(osn_loc)

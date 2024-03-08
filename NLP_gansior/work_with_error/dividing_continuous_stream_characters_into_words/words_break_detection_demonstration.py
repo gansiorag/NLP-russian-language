@@ -62,7 +62,7 @@ if __name__ == '__main__':
     # Начальные установки
     widthLabe = pmod.geom_par['widthLabe']
     widthBt = pmod.geom_par['widthBt']
-    heighY = pmod.geom_par['heighY']
+    heigh_y = pmod.geom_par['heigh_y']
 
     Osn = ttk.Notebook(root)
     add_page(Osn, 'page_start',  ' Начальные установки  ')

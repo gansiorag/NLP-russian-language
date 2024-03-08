@@ -22,7 +22,7 @@ Ending 2022//
 geom_par = {'rootGeometry': "1750x900",
             'widthLabe': 500,
             'widthBt': 300,
-            'heighY': 10,
+            'heigh_y': 10,
             'P2widthW': 560
             }
 
