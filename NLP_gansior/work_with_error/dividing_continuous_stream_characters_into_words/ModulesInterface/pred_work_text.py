@@ -44,7 +44,7 @@ class page_pred_work():
                                      text="Прочитать с ")
         self.page_base_start.place(
             x=10, y=geom_par['heigh_y'] + 40,
-            anchor="w", heigh=20, width=150,
+            anchor="w", heigh=30, width=150,
             bordermode=OUTSIDE)
 
         self.start_simb = Text(self.page_base)
@@ -54,20 +54,22 @@ class page_pred_work():
             heigh=30, width=50,
             bordermode=OUTSIDE)
 
-        def func3(): return self.readSimb()
+        def func3():
+            return self.read_simb()
         self.page_base_read_bt_pit = Button(
             self.page_base, text="Прочитать симв", command=func3)
         self.page_base_read_bt_pit.place(
-            x=190, y=geom_par['heigh_y'] + 40, anchor="w", heigh=30, width=170,
+            x=190, y=geom_par['heigh_y'] + 45, anchor="w", heigh=30, width=170,
             bordermode=OUTSIDE)
 
         self.kol_sim = Text(self.page_base)
         self.kol_sim.place(
-            x=365, y=geom_par['heigh_y'] + 25, anchor="nw",
+            x=365, y=geom_par['heigh_y'] + 30, anchor="nw",
             heigh=30, width=50,
             bordermode=OUTSIDE)
 
-        def func1(): return self.readAllSource()
+        def func1():
+            return self.readAllSource()
         self.page_base_read_bt = Button(
             self.page_base, text="Прочитать весь файл", command=func1)
         self.page_base_read_bt.place(
@@ -75,7 +77,8 @@ class page_pred_work():
             anchor="w", heigh=30, width=170,
             bordermode=OUTSIDE)
 
-        def func2(): return self.page_base_click_btn_clear()
+        def func2():
+            return self.page_base_click_btn_clear()
         self.page_base_btn_clear = Button(
             self.page_base, text="Очистить", command=func2)
         self.page_base_btn_clear.place(
@@ -88,7 +91,7 @@ class page_pred_work():
                                                 width=y_st_text,
                                                 bordermode=OUTSIDE)
 
-        botBg = 590
+        botBg = 40
 
         # Two colunm ====================================================
 
@@ -106,29 +109,38 @@ class page_pred_work():
                              40, anchor="w", heigh=30, width=110,
                              bordermode=OUTSIDE)
 
-        def func5(): return self.statText()
-        self.btn_stat = Button(self.page_base, text="Статистика",
+# ========= thert column ==================
+        t_col = 600
+        w_bot = 170
+
+        def func5():
+            return self.stat_simb()
+        self.btn_stat = Button(self.page_base, text="Статистика символов",
                                command=func5)
-        self.btn_stat.place(x=geom_par['P2widthW']+20 + 115,
-                            y=geom_par['heigh_y'] +
-                            40, anchor="w", heigh=30,
-                            width=110, bordermode=OUTSIDE)
+        self.btn_stat.place(x=geom_par['P2widthW'] + t_col,
+                            y=geom_par['heigh_y'] + botBg,
+                            anchor="w", heigh=30,
+                            width=w_bot, bordermode=OUTSIDE)
 
-        def func6(): return self.page_base_click_btn_Ras()
+        def func6():
+            return self.page_base_click_btn_Ras()
+
         self.page_base_btn_Ras = Button(
-            self.page_base, text="Обучиться", command=func6)
-        self.page_base_btn_Ras.place(x=geom_par['P2widthW']+20,
-                                     y=geom_par['heigh_y'] +
-                                     botBg, anchor="w", heigh=30,
-                                     width=150, bordermode=OUTSIDE)
+            self.page_base, text="Статистика слов", command=func6)
+        self.page_base_btn_Ras.place(x=geom_par['P2widthW'] + t_col,
+                                     y=geom_par['heigh_y'] + botBg * 2,
+                                     anchor="w", heigh=30,
+                                     width=w_bot, bordermode=OUTSIDE)
 
-        def func7(): return self.page_base_click_btn_Ras()
+        def func7():
+            return self.page_base_click_btn_Ras()
+
         self.page_base_btn_Unm = Button(
-            self.page_base, text="Разделить", command=func7)
-        self.page_base_btn_Unm.place(x=geom_par['P2widthW']+180,
-                                     y=geom_par['heigh_y'] +
-                                     botBg, anchor="w",
-                                     heigh=30, width=150, bordermode=OUTSIDE)
+            self.page_base, text=" ********* ", command=func7)
+        self.page_base_btn_Unm.place(x=geom_par['P2widthW'] + t_col,
+                                     y=geom_par['heigh_y'] + botBg * 3,
+                                     anchor="w",
+                                     heigh=30, width=w_bot, bordermode=OUTSIDE)
 
         # self.page_base_btn_Kontext = Button(self.page_base,
         # text="Разделить текст",
@@ -150,19 +162,14 @@ class page_pred_work():
                                        width=y_st_text,
                                        bordermode=OUTSIDE)
 
-    def statText(self):
-        IsTxt = self.page_base_clear_Text.get('1.0', END)
-        stat = Counter()
-        servList = IsTxt.strip().split(' ')
-        for word in servList:
-            stat[len(word)] += 1
-        stat.most_common()
-        # print(stat)
+    def stat_simb(self):
         self.page_base_TextPath3.delete('1.0', END)
-        textOut = ' длина слова  -----  кол.слов\n'
-        for k in stat.most_common():
-            textOut += (f'{k[0]:12}  -----  {k[1]:8}\n')
-        self.page_base_TextPath3.insert('1.0', textOut)
+
+        text_out = ' символ  -----  кол.\n'
+        for k in var_sit['stat_simb_all_text']:
+            text_out += (f"{k:3}  -----  " +
+                         f"{var_sit['stat_simb_all_text'][k]:8}\n")
+        self.page_base_TextPath3.insert('1.0', text_out)
 
     def statTextList(self, textList):
         stat = Counter()
@@ -176,6 +183,17 @@ class page_pred_work():
             textOut += (f'{k[0]:12}  -----  {k[1]:8}\n')
         self.page_base_TextPath3.delete('1.0', END)
         self.page_base_TextPath3.insert('1.0', textOut)
+
+    def stat_simbol_full_text(self):
+        is_text = var_sit['all_text'].lower()
+        is_text = is_text.replace('\n', ' ').replace('  ', ' ')\
+            .replace('  ', ' ').replace('\t', ' ').replace('\r', ' ')
+        stat = Counter()
+        stat['общ_кол'] = len(is_text)
+        for simb in list(is_text):
+            stat[simb] += 1
+        vv = dict(stat.most_common())
+        return vv
 
     def tokinez(self):
         """
@@ -228,40 +246,54 @@ class page_pred_work():
         # ttt = rul_three.sub(' ',ttt)
         self.page_base_clear_Text.delete('1.0', END)
         self.page_base_clear_Text.insert('1.0', ttt)
+        var_sit['token_text'] = ttt
+        var_sit['stat_simb_all_text'] = self.stat_simbol_full_text()
+        # var_sit = {
+        #    'stat_token_text': [],
+        #    'result_text': '',
+        #    'stat_result_text': [],
+        #    'dict_text': []}
         return ttt
 
     def readAllSource(self):
-        nameFile = var_sit['name_file']
+        name_file = var_sit['name_file']
         print('readAllSource ', var_sit)
-        # sys.path.append(nameFile)
-        if os.path.isfile(nameFile):
-            with open(nameFile, "r", encoding='utf-8') as i_f:
-                allText = i_f.read()
+        start_s = int(self.start_simb.get("1.0", END).strip())
+        # sys.path.append(name_file)
+        if os.path.isfile(name_file):
+            with open(name_file, "r", encoding='utf-8') as i_f:
+                all_text = i_f.read()
             self.page_base_lineText_DublSlovo.delete('1.0', END)
-            self.page_base_lineText_DublSlovo.insert('1.0', allText)
+            self.page_base_lineText_DublSlovo.insert('1.0', all_text[start_s:])
+            var_sit['all_text'] = all_text[start_s:]
         else:
             self.page_base_lineText_DublSlovo.delete('1.0', END)
             self.page_base_lineText_DublSlovo.insert(
-                '1.0', f"файла с таким именем {nameFile}  не существует!!!")
-        # print(nameFile)
+                '1.0', f"файла с таким именем {name_file}  не существует!!!")
+        # print(name_file)
 
-    def readSimb(self):
-        nameFile = var_sit['name_file']
-        kolS = int(self.kol_sim.get("1.0", END).strip())
-        # sys.path.append(nameFile)
-        if os.path.isfile(nameFile):
-            with open(nameFile, "r", encoding='utf-8') as i_f:
-                allText = i_f.read()
+    def read_simb(self):
+        name_file = var_sit['name_file']
+        kol_s = int(self.kol_sim.get("1.0", END).strip())
+        start_s = int(self.start_simb.get("1.0", END).strip())
+        # sys.path.append(name_file)
+        if os.path.isfile(name_file):
+            with open(name_file, "r", encoding='utf-8') as i_f:
+                all_text = i_f.read()
             self.page_base_lineText_DublSlovo.delete('1.0', END)
-            self.page_base_lineText_DublSlovo.insert('1.0', allText[:kolS])
+            self.page_base_lineText_DublSlovo\
+                .insert('1.0',
+                        all_text[start_s:start_s + kol_s])
+            var_sit['all_text'] = all_text[start_s:start_s + kol_s]
         else:
             self.page_base_lineText_DublSlovo.delete('1.0', END)
             self.page_base_lineText_DublSlovo.insert(
-                '1.0', f"файла с таким именем {nameFile}  не существует!!!")
-        # print(nameFile)
+                '1.0', f"файла с таким именем {name_file}  не существует!!!")
+        # print(name_file)
 
     def page_base_click_btn_clear(self):
         self.page_base_lineText_DublSlovo.delete(1.0, END)
+        var_sit['all_text'] = ''
 
     def page_base_click_btn_Ras(self):
         # learn and get dict fragment of diferetnt
@@ -270,32 +302,35 @@ class page_pred_work():
         ttt = self.tokinez().split()
 
         # lead module count dictionary
-        # dd, text_exp, ReserchText, ReserchText332 = connectLearn(ttt)
-        dd, text_exp, ReserchText = connectLearn(ttt)
+        # dd, text_exp, reserch_text, reserch_text332 = connectLearn(ttt)
+        dd, text_exp, reserch_text = connectLearn(ttt)
 
         # define name file rezult work
-        strBase = {'nameFileIs': var_sit['name_file']}
-        nameFile = var_sit['name_file'].strip()\
+        str_base = {'name_fileIs': var_sit['name_file']}
+        name_file = var_sit['name_file'].strip()\
             .split('/')[-1].split('.')[0] + '_'
-        PathPrjWork = PathPrj +\
+        path_prj_work = PathPrj +\
             'dividing_continuous_stream_characters_into_words/rezultResearch/'
-        datFile = str(datetime.now())\
-            .replace('-', '_').replace(' ', '_').replace(':', '_').split('.')[0]
-        nameFileStream = PathPrjWork + nameFile + 'Stream_' + datFile + '.txt'
+        dat_file = str(datetime.now())\
+                   .replace('-', '_').replace(' ', '_')\
+                   .replace(':', '_').split('.')[0]
+        name_file_stream = path_prj_work + name_file +\
+            'Stream_' + dat_file + '.txt'
 
         print('first count words = ', len(ttt))
-        strBase['nameFileStream'] = nameFileStream
-        FileStream = open(nameFileStream, 'w', encoding='utf-8')
-        nameFileVoc = PathPrjWork + nameFile + 'Voc_' + datFile + '.picle'
-        strBase['nameFileVoc'] = nameFileVoc
-        FileVoc = open(nameFileVoc, 'wb')
-        pickle.dump(dd, FileVoc)
-        FileVoc.close()
+        str_base['name_file_stream'] = name_file_stream
+        file_stream = open(name_file_stream, 'w', encoding='utf-8')
+        name_file_voc = path_prj_work + name_file + 'Voc_' +\
+            dat_file + '.picle'
+        str_base['name_file_voc'] = name_file_voc
+        file_voc = open(name_file_voc, 'wb')
+        pickle.dump(dd, file_voc)
+        file_voc.close()
         self.page_base_clear_Text.delete('1.0', END)
-        self.page_base_clear_Text.insert('1.0', ReserchText['rez'])
-        json.dump(ReserchText, FileStream, ensure_ascii=False)
-        FileStream.close()
-        RezText = separatorWords(text_exp, dd)
+        self.page_base_clear_Text.insert('1.0', reserch_text['rez'])
+        json.dump(reserch_text, file_stream, ensure_ascii=False)
+        file_stream.close()
+        rez_text = separatorWords(text_exp, dd)
         self.page_base_TextPath3.delete('1.0', END)
-        self.page_base_TextPath3.insert('1.0', RezText)
-        print('second count words = ', len(RezText.split()))
+        self.page_base_TextPath3.insert('1.0', rez_text)
+        print('second count words = ', len(rez_text.split()))

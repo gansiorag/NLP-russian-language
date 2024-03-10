@@ -32,4 +32,5 @@ var_sit = {'name_file': '',
            'stat_token_text': [],
            'result_text': '',
            'stat_result_text': [],
+           'stat_simb_all_text': {},
            'dict_text': []}

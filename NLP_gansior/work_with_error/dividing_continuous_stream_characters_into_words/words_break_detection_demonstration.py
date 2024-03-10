@@ -20,7 +20,8 @@ from tkinter import ttk, Frame
 
 
 nameProjectStart = 'NLP-russian-language'
-nameProject = 'NLP-russian-language/NLP_gansior/work_with_error/dividing_continuous_stream_characters_into_words/'
+nameProject = 'NLP-russian-language/NLP_gansior/work_with_error/' +\
+    'dividing_continuous_stream_characters_into_words/'
 cprint(os.getcwd(), 'green')
 PathPrj = os.getcwd().split(nameProjectStart)[0] + nameProject + '/'
 cprint(PathPrj, 'blue')
