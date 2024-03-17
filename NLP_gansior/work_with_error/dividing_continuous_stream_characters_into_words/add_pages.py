@@ -6,7 +6,7 @@ Returns:
 from tkinter import Frame
 from ModulesInterface.page1 import Page1
 from ModulesInterface.pred_work_text import page_pred_work
-from ModulesInterface.searches_sources import search_s
+from ModulesInterface.searches_sources import SearchS
 
 
 def add_page(osn_loc, name_p: str, text: str):
@@ -29,7 +29,7 @@ def add_page(osn_loc, name_p: str, text: str):
             ppp = page_pred_work(osn_loc)
             page_loc = ppp.page_base
         case 'searches_sources':
-            ppp = search_s(osn_loc)
+            ppp = SearchS(osn_loc)
             page_loc = ppp.page_base
             # page_loc = osn_loc.add(pppp, text=text)
         case 'searches_dict':

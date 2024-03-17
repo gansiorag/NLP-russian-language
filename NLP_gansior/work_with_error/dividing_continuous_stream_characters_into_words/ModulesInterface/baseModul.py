@@ -29,8 +29,10 @@ geom_par = {'rootGeometry': "1750x900",
 var_sit = {'name_file': '',
            'all_text': '',
            'token_text': '',
-           'stat_token_text': [],
+           'stat_word_token_text': [],
+           'stat_len_word_token_text': [],
            'result_text': '',
            'stat_result_text': [],
            'stat_simb_all_text': {},
-           'dict_text': []}
+           'dict_model': [],
+           'text_exp': ''}

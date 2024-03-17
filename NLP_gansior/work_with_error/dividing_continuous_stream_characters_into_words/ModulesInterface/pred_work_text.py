@@ -123,7 +123,7 @@ class page_pred_work():
                             width=w_bot, bordermode=OUTSIDE)
 
         def func6():
-            return self.page_base_click_btn_Ras()
+            return self.stat_word_full_text()
 
         self.page_base_btn_Ras = Button(
             self.page_base, text="Статистика слов", command=func6)
@@ -133,10 +133,10 @@ class page_pred_work():
                                      width=w_bot, bordermode=OUTSIDE)
 
         def func7():
-            return self.page_base_click_btn_Ras()
+            return self.stat_text_len_word()
 
         self.page_base_btn_Unm = Button(
-            self.page_base, text=" ********* ", command=func7)
+            self.page_base, text="Статистика длин слов", command=func7)
         self.page_base_btn_Unm.place(x=geom_par['P2widthW'] + t_col,
                                      y=geom_par['heigh_y'] + botBg * 3,
                                      anchor="w",
@@ -171,18 +171,26 @@ class page_pred_work():
                          f"{var_sit['stat_simb_all_text'][k]:8}\n")
         self.page_base_TextPath3.insert('1.0', text_out)
 
-    def statTextList(self, textList):
-        stat = Counter()
-        for word in textList:
-            stat[len(word)] += 1
-        stat.most_common()
-        # print(stat)
+    def stat_text_len_word(self):
+        text_out = 'Сначала токенезируйте текст!!! \n'
+        if var_sit['token_text']:
+            text_list = var_sit['token_text'].split()
+            stat = Counter()
+            for word in text_list:
+                stat[len(word)] += 1
+            stat.most_common()
+
+            var_sit['stat_len_word_token_text'] = dict(stat)
+            self.page_base_TextPath3.delete('1.0', END)
+            text_out = f' общее количество слов  ----- {str(len(text_list))}\n\n'
+            text_out += ' длина слова  -----  кол.слов\n'
+            stat = sorted(stat.items(), key=lambda i: i[1], reverse=True)
+            print(stat)
+            for k in stat:
+                text_out += (f'{k[0]:12}  -----  {k[1]:8}\n')
+        print(var_sit['stat_len_word_token_text'])
         self.page_base_TextPath3.delete('1.0', END)
-        textOut = ' длина слова  -----  кол.слов\n'
-        for k in stat.most_common():
-            textOut += (f'{k[0]:12}  -----  {k[1]:8}\n')
-        self.page_base_TextPath3.delete('1.0', END)
-        self.page_base_TextPath3.insert('1.0', textOut)
+        self.page_base_TextPath3.insert('1.0', text_out)
 
     def stat_simbol_full_text(self):
         is_text = var_sit['all_text'].lower()
@@ -194,6 +202,30 @@ class page_pred_work():
             stat[simb] += 1
         vv = dict(stat.most_common())
         return vv
+
+    def stat_word_full_text(self):
+        """_summary_
+        """
+        text_out = 'Сначала токенезируйте текст!!! \n'
+        if var_sit['token_text']:
+            is_text = var_sit['token_text']
+            is_text = is_text.replace('\n', ' ').replace('  ', ' ')\
+                .replace('  ', ' ').replace('\t', ' ').replace('\r', ' ')
+            stat = Counter()
+            list_text = is_text.split()
+            text_out = f' общее количество слов  ----- {str(len(list_text))}\n\n'
+            text_out += ' слово  -----------  кол.\n'
+            for simb in list_text:
+                stat[simb.strip()] += 1
+            stat = dict(stat)
+            var_sit['stat_word_token_text'] = dict(stat)
+            stat = sorted(stat.items(), key=lambda i: i[1], reverse=True)
+            for word in stat:
+                str_s = (f" {word[0]}  ----- "
+                         f"{word[1]} \n")
+                text_out += str_s
+        self.page_base_TextPath3.delete('1.0', END)
+        self.page_base_TextPath3.insert('1.0', text_out)
 
     def tokinez(self):
         """
@@ -256,6 +288,9 @@ class page_pred_work():
         return ttt
 
     def readAllSource(self):
+        """_summary_
+        """
+
         name_file = var_sit['name_file']
         print('readAllSource ', var_sit)
         start_s = int(self.start_simb.get("1.0", END).strip())
