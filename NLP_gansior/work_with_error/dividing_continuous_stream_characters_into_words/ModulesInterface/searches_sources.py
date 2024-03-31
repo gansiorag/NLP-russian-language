@@ -129,8 +129,6 @@ class SearchS():
             width=geom_par['P2widthW'],
             bordermode=OUTSIDE)
 
-
-
         # ========= Three column =================
         self.page_base_label_Path3 = Label(self.page_base, text="Результат")
         self.page_base_label_Path3.place(
