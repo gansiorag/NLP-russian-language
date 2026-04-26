@@ -1,0 +1,8 @@
+﻿Категория;Модели
+Bidirectional encoders;"BERT, RoBERTa, ALBERT, DistilBERT, ELECTRA, DeBERTa"
+Autoregressive decoders;"GPT-2, GPT-3, LLaMA, LLaMA 2, Mistral, Mixtral"
+Encoder-Decoder / Seq2Seq;"T5, BART, MASS, ProphetNet, Flan-T5"
+Эффективные трансформеры;"Longformer, BigBird, Reformer, Performer, Linformer, Funnel-Transformer"
+Мультимодальные / специализированные;"LayoutLM, ERNIE 3.0, UniLM"
+Ранние контекстные эмбеддинги;"ELMo, Transformer-XL"
+Масштабные предобученные модели;"Megatron-BERT, XLNet"

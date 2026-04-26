@@ -1,0 +1,30 @@
+BERT (Bidirectional Encoder Representations from Transformers) — Google, 2018
+ELMo (Embeddings from Language Models) — AllenNLP, 2018
+XLNet — Google/CMU, 2019
+RoBERTa (Robustly optimized BERT) — Meta, 2019
+ALBERT (A Lite BERT) — Google, 2019
+DistilBERT — Hugging Face, 2019
+ELECTRA — Google/Stanford, 2020
+T5 (Text-To-Text Transfer Transformer) — Google, 2019
+BART (Bidirectional and Auto-Regressive Transformers) — Meta, 2019
+GPT-2 (Generative Pre-trained Transformer 2) — OpenAI, 2019
+GPT-3 — OpenAI, 2020
+DeBERTa (Decoding-enhanced BERT) — Microsoft, 2020
+Longformer — AllenAI, 2020
+BigBird — Google, 2020
+Reformer — Google, 2020
+Performer — Google, 2020
+Linformer — Facebook AI, 2020
+Transformer-XL — Google/CMU, 2019
+Funnel-Transformer — Google/CMU, 2020
+LayoutLM — Microsoft, 2020
+UniLM (Unified Language Model) — Microsoft, 2019
+MASS (Masked Sequence to Sequence) — Microsoft, 2019
+ProphetNet — Microsoft, 2020
+Megatron-BERT — NVIDIA, 2019
+ERNIE 3.0 — Baidu, 2021
+Flan-T5 — Google, 2022
+LLaMA (Large Language Model Meta AI) — Meta, 2023
+LLaMA 2 — Meta, 2023
+Mistral — Mistral AI, 2023
+Mixtral of Experts — Mistral AI, 2023
