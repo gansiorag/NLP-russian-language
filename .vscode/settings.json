@@ -2,5 +2,20 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8"
     },
-    "python.formatting.provider": "none"
+    "python.formatting.provider": "none",
+    "workbench.editorAssociations": {
+        "*.parquet": "duckdb.dataFileViewer",
+        "*.csv": "duckdb.dataFileViewer",
+        "*.tsv": "duckdb.dataFileViewer",
+        "*.xlsx": "duckdb.dataFileViewer"
+    },
+    "duckdb.databases": [
+        {
+            "alias": "base_all",
+            "type": "file",
+            "path": "/home/al/Projects_My/NLP-russian-language/datasets/base_all.duckdb",
+            "attached": true
+        }
+    ],
+    "duckdb.defaultDatabase": "base_all"
 }
